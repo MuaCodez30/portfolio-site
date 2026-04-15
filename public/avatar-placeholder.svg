@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="280" height="280" viewBox="0 0 280 280" role="img" aria-label="Placeholder avatar">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1a2230"/>
+      <stop offset="100%" stop-color="#0c0f14"/>
+    </linearGradient>
+  </defs>
+  <circle cx="140" cy="140" r="140" fill="url(#g)"/>
+  <circle cx="140" cy="118" r="52" fill="#5b8cff" opacity="0.35"/>
+  <path d="M60 232c18-48 58-72 80-72s62 24 80 72" fill="#5b8cff" opacity="0.25"/>
+  <text x="140" y="138" text-anchor="middle" font-family="system-ui,sans-serif" font-size="56" font-weight="700" fill="#e8ecf4">MI</text>
+</svg>

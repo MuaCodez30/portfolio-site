@@ -1,0 +1,40 @@
+---
+import type { SiteData } from "../types/site";
+import Section from "./Section.astro";
+
+interface Props {
+  data: SiteData;
+}
+const { data } = Astro.props;
+---
+
+<Section
+  id="education"
+  title="Education"
+  intro="Formal training that shaped how I approach systems, data, and ML."
+>
+  <div class="grid-2">
+    {
+      data.education.map((e, i) => (
+        <article class:list={["card", { "card-emphasis": i === 0 }]}>
+          <h3>{e.institution}</h3>
+          {e.degree && <p class="card-meta">{e.degree}</p>}
+          {e.focus && <p class="education-focus">{e.focus}</p>}
+          <p class="card-meta">
+            {e.location}
+            {e.expected && <> · Expected {e.expected}</>}
+            {e.end && <> · {e.end}</>}
+          </p>
+          {e.summary && <p class="education-summary">{e.summary}</p>}
+          {e.highlights && (
+            <ul>
+              {e.highlights.map((h) => (
+                <li>{h}</li>
+              ))}
+            </ul>
+          )}
+        </article>
+      ))
+    }
+  </div>
+</Section>

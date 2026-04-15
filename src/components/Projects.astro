@@ -1,0 +1,214 @@
+---
+import type { SiteData } from "../types/site";
+import Section from "./Section.astro";
+import ProjectCard from "./ProjectCard.astro";
+
+interface Props {
+  data: SiteData;
+}
+const { data } = Astro.props;
+const byKind = (k: string) => data.projects.filter((p) => p.kind === k);
+const featured = byKind("featured");
+const course = byKind("course");
+const archive = byKind("archive");
+const hasEarlier = archive.length > 0 || !!data.mentorship;
+---
+
+<Section
+  id="work"
+  title="Selected work"
+  intro="A mix of research-style builds, course deliverables, and experiments. Each card is written for the web—not copied verbatim from a CV."
+>
+  {
+    featured.length > 0 && (
+      <>
+        <h3 class="subsection-title">Highlights</h3>
+        <div class="projects-grid">
+          {featured.map((p) => (
+            <ProjectCard project={p} />
+          ))}
+        </div>
+      </>
+    )
+  }
+  {
+    course.length > 0 && (
+      <>
+        <h3 class="subsection-title">Coursework</h3>
+        <p class="section-intro coursework-intro">
+          Six applied builds from ADA coursework—four in machine learning, one in
+          artificial intelligence (MDP planning and reinforcement learning), and one in
+          data engineering (historical football analysis). Each card ties the brief to what
+          shipped in code and notebooks, with numbers taken from saved runs where they
+          exist.
+        </p>
+        <div
+          class="coursework-carousel"
+          data-coursework-carousel
+          tabindex="0"
+          role="region"
+          aria-roledescription="carousel"
+          aria-label="Coursework projects carousel"
+        >
+          <button
+            type="button"
+            class="carousel-nav carousel-prev"
+            aria-label="Previous coursework project"
+          >
+            <span aria-hidden="true">‹</span>
+          </button>
+          <div class="carousel-viewport">
+            <div class="carousel-track" data-carousel-track>
+              {course.map((p) => (
+                <div class="carousel-slide" data-carousel-slide>
+                  <ProjectCard project={p} />
+                </div>
+              ))}
+            </div>
+          </div>
+          <button
+            type="button"
+            class="carousel-nav carousel-next"
+            aria-label="Next coursework project"
+          >
+            <span aria-hidden="true">›</span>
+          </button>
+          <div class="carousel-dots" data-carousel-dots></div>
+        </div>
+        <p class="coursework-carousel-hint">
+          Carousel: use the side arrows or the dots below. When the frame is focused,
+          use the left and right arrow keys on the keyboard.
+        </p>
+        <script is:inline>
+          (function () {
+            function boot() {
+              var root = document.querySelector("[data-coursework-carousel]");
+              if (!root) return;
+
+              var track = root.querySelector("[data-carousel-track]");
+              var viewport = root.querySelector(".carousel-viewport");
+              var slides = root.querySelectorAll("[data-carousel-slide]");
+              var dotsHost = root.querySelector("[data-carousel-dots]");
+              var prevBtn = root.querySelector(".carousel-prev");
+              var nextBtn = root.querySelector(".carousel-next");
+              var n = slides.length;
+              var index = 0;
+              var reduceMotion = window.matchMedia(
+                "(prefers-reduced-motion: reduce)",
+              ).matches;
+
+              dotsHost.innerHTML = "";
+              for (var d = 0; d < n; d++) {
+                var dot = document.createElement("button");
+                dot.type = "button";
+                dot.className = "carousel-dot" + (d === 0 ? " is-active" : "");
+                dot.setAttribute("aria-label", "Show coursework project " + (d + 1));
+                dot.setAttribute("data-carousel-index", String(d));
+                dotsHost.appendChild(dot);
+              }
+
+              function slideWidth() {
+                return viewport.getBoundingClientRect().width;
+              }
+
+              function layout() {
+                var w = slideWidth();
+                for (var s = 0; s < slides.length; s++) {
+                  slides[s].style.flex = "0 0 " + w + "px";
+                  slides[s].style.width = w + "px";
+                }
+              }
+
+              function updateDots() {
+                var dots = dotsHost.querySelectorAll(".carousel-dot");
+                for (var j = 0; j < dots.length; j++) {
+                  dots[j].classList.toggle("is-active", j === index);
+                }
+              }
+
+              function go(to) {
+                index = ((to % n) + n) % n;
+                var w = slideWidth();
+                var offset = -index * w;
+                track.style.transform = "translate3d(" + offset + "px,0,0)";
+                track.style.transition = reduceMotion
+                  ? "none"
+                  : "transform 0.35s ease";
+                updateDots();
+                root.setAttribute(
+                  "aria-label",
+                  "Coursework projects carousel, slide " + (index + 1) + " of " + n,
+                );
+              }
+
+              layout();
+              go(index);
+
+              prevBtn.addEventListener("click", function () {
+                go(index - 1);
+              });
+              nextBtn.addEventListener("click", function () {
+                go(index + 1);
+              });
+              dotsHost.addEventListener("click", function (e) {
+                var t = e.target;
+                if (t && t.getAttribute("data-carousel-index") != null) {
+                  go(+t.getAttribute("data-carousel-index"));
+                }
+              });
+
+              root.addEventListener("keydown", function (e) {
+                if (e.key === "ArrowLeft") {
+                  go(index - 1);
+                  e.preventDefault();
+                } else if (e.key === "ArrowRight") {
+                  go(index + 1);
+                  e.preventDefault();
+                }
+              });
+
+              window.addEventListener("resize", function () {
+                layout();
+                go(index);
+              });
+            }
+
+            if (document.readyState === "loading") {
+              document.addEventListener("DOMContentLoaded", boot);
+            } else {
+              boot();
+            }
+          })();
+        </script>
+      </>
+    )
+  }
+</Section>
+
+{
+  hasEarlier && (
+    <Section
+      id="earlier-work"
+      title="Earlier work & extras"
+      intro="Older builds and community work—still part of the story, just not the main ML thread above."
+    >
+      <div class="projects-grid">
+        {archive.map((p) => (
+          <ProjectCard project={p} />
+        ))}
+        {data.mentorship && (
+          <article class="card project-card">
+            <span class="badge-role">Community</span>
+            <h3>{data.mentorship.title}</h3>
+            <p class="project-lede">{data.mentorship.summary}</p>
+            <ul>
+              {data.mentorship.bullets.map((b) => (
+                <li>{b}</li>
+              ))}
+            </ul>
+          </article>
+        )}
+      </div>
+    </Section>
+  )
+}

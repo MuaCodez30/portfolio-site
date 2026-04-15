@@ -1,0 +1,41 @@
+---
+import type { SiteData } from "../types/site";
+import Section from "./Section.astro";
+
+interface Props {
+  data: SiteData;
+}
+const { data } = Astro.props;
+---
+
+<Section
+  id="skills"
+  title="Skills & languages"
+  intro="Grouped the way I think about tooling—swap items anytime in resume.yaml."
+>
+  <div class="skill-group-grid">
+    {
+      data.skill_groups.map((g) => (
+        <div class="card skill-group-card">
+          <h3 class="skill-group-title">{g.name}</h3>
+          <div class="chips">
+            {g.items.map((s) => (
+              <span class="chip">{s}</span>
+            ))}
+          </div>
+        </div>
+      ))
+    }
+  </div>
+  <h3 class="subsection-title" style="margin-top: 2rem;">Languages</h3>
+  <div class="lang-grid">
+    {
+      data.languages.map((lang) => (
+        <div class="lang-row">
+          <span class="lang-name">{lang.name}</span>
+          {lang.level && <span class="lang-level">{lang.level}</span>}
+        </div>
+      ))
+    }
+  </div>
+</Section>

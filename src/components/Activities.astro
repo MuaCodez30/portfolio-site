@@ -1,0 +1,26 @@
+---
+import type { SiteData } from "../types/site";
+import Section from "./Section.astro";
+
+interface Props {
+  data: SiteData;
+}
+const { data } = Astro.props;
+---
+
+<Section
+  id="activities"
+  title="Activities & certifications"
+  intro="Community, languages, and short programs outside the usual syllabus."
+>
+  <div class="activities-grid">
+    {
+      data.activities.map((a) => (
+        <article class="card activity-card">
+          <h3 class="activity-title">{a.title}</h3>
+          {a.detail && <p class="activity-detail">{a.detail}</p>}
+        </article>
+      ))
+    }
+  </div>
+</Section>

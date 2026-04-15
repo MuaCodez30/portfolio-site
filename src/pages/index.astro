@@ -1,0 +1,31 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { loadSite } from "../data/loadSite";
+import SiteNav from "../components/SiteNav.astro";
+import Hero from "../components/Hero.astro";
+import About from "../components/About.astro";
+import Experience from "../components/Experience.astro";
+import Projects from "../components/Projects.astro";
+import Education from "../components/Education.astro";
+import Skills from "../components/Skills.astro";
+import Activities from "../components/Activities.astro";
+import Contact from "../components/Contact.astro";
+import Footer from "../components/Footer.astro";
+
+const data = loadSite();
+---
+
+<BaseLayout title={`${data.name} — Portfolio`}>
+  <SiteNav brand={data.name} />
+  <main>
+    <Hero data={data} />
+    <About data={data} />
+    <Experience data={data} />
+    <Projects data={data} />
+    <Education data={data} />
+    <Skills data={data} />
+    <Activities data={data} />
+    <Contact data={data} />
+  </main>
+  <Footer name={data.name} />
+</BaseLayout>

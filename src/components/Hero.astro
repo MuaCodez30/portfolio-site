@@ -1,0 +1,37 @@
+---
+import type { SiteData } from "../types/site";
+
+interface Props {
+  data: SiteData;
+}
+const { data } = Astro.props;
+const { name, hero, contact, social, location } = data;
+const based = `Based in ${location.city}, ${location.country}`;
+---
+
+<section class="hero" id="home">
+  <div class="wrap hero-grid">
+    <div class="avatar">
+      <img src="/profile.png" alt={`${name} profile photo`} width="140" height="140" />
+    </div>
+    <div>
+      <h1>{name}</h1>
+      <p class="hero-based">{based}</p>
+      <p class="tagline">{hero.tagline}</p>
+      <p class="sub">{hero.subtagline}</p>
+      {hero.intro && <p class="hero-intro">{hero.intro}</p>}
+      <div class="cta-row">
+        <a class="btn btn-primary" href={`mailto:${contact.email}`}>Email me</a>
+        <a class="btn" href={social.linkedin} target="_blank" rel="noopener noreferrer">
+          {contact.linkedin_label}
+        </a>
+        {social.github && (
+          <a class="btn" href={social.github} target="_blank" rel="noopener noreferrer">
+            GitHub
+          </a>
+        )}
+        <a class="btn" href="/resume.pdf" download>Download resume</a>
+      </div>
+    </div>
+  </div>
+</section>

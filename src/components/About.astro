@@ -1,0 +1,24 @@
+---
+import type { SiteData } from "../types/site";
+import Section from "./Section.astro";
+
+interface Props {
+  data: SiteData;
+}
+const { data } = Astro.props;
+const isLorem = (p: string) => p.toLowerCase().includes("lorem ipsum");
+---
+
+<Section
+  id="about"
+  title="About"
+  intro="A few lines about how I work—tuned for visitors, not ATS parsers."
+>
+  <div class="about-columns">
+    {
+      data.about.paragraphs.map((p) => (
+        <p class={isLorem(p) ? "lorem" : undefined}>{p}</p>
+      ))
+    }
+  </div>
+</Section>

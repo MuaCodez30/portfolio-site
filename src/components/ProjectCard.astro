@@ -1,0 +1,66 @@
+---
+import type { ProjectEntry } from "../types/site";
+import { kindLabel } from "../data/loadSite";
+
+interface Props {
+  project: ProjectEntry;
+}
+const { project } = Astro.props;
+const { links } = project;
+const detailsLabel =
+  project.kind === "course"
+    ? "See how it maps to the course brief"
+    : "See outcomes and details";
+---
+
+<article class="card project-card" tabindex="0">
+  <span class="badge-role">{project.badge_label ?? kindLabel(project.kind)}</span>
+  <h3>{project.name}</h3>
+  <p class="card-meta">{project.date}</p>
+  {project.context && <p class="project-context">{project.context}</p>}
+  {project.lede && <p class="project-lede">{project.lede}</p>}
+  {
+    project.stack && project.stack.length > 0 && (
+      <div class="chips project-stack">
+        {project.stack.map((s) => (
+          <span class="chip chip-sm">{s}</span>
+        ))}
+      </div>
+    )
+  }
+  {
+    links && (links.repo || links.demo || links.writeup) && (
+      <p class="project-links">
+        {links.repo && (
+          <a href={links.repo} target="_blank" rel="noopener noreferrer">
+            Code
+          </a>
+        )}
+        {links.demo && (
+          <>
+            {links.repo && <span class="link-sep">·</span>}
+            <a href={links.demo} target="_blank" rel="noopener noreferrer">
+              Demo
+            </a>
+          </>
+        )}
+        {links.writeup && (
+          <>
+            {(links.repo || links.demo) && <span class="link-sep">·</span>}
+            <a href={links.writeup} target="_blank" rel="noopener noreferrer">
+              Notes
+            </a>
+          </>
+        )}
+      </p>
+    )
+  }
+  <details class="project-details">
+    <summary class="project-details-summary">{detailsLabel}</summary>
+    <ul class="project-bullet-list">
+      {project.bullets.map((b) => (
+        <li>{b}</li>
+      ))}
+    </ul>
+  </details>
+</article>

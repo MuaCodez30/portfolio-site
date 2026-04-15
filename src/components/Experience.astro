@@ -1,0 +1,44 @@
+---
+import type { SiteData } from "../types/site";
+import Section from "./Section.astro";
+import { formatExperienceRange } from "../data/loadSite";
+
+interface Props {
+  data: SiteData;
+}
+const { data } = Astro.props;
+---
+
+<Section
+  id="experience"
+  title="Experience"
+  intro="Internships, analyst work, and founder-side shipping—details below stay concrete even when the role was broad."
+>
+  <div class="grid-2">
+    {
+      data.experience.map((job) => (
+        <article class="card">
+          <h3>
+            {job.title} — {job.company}
+          </h3>
+          <p class="card-meta">
+            {job.location} · {formatExperienceRange(job.start, job.end)}
+          </p>
+          {job.summary && <p class="experience-summary">{job.summary}</p>}
+          {job.stack && job.stack.length > 0 && (
+            <div class="chips" style="margin-bottom: 0.75rem;">
+              {job.stack.map((s) => (
+                <span class="chip chip-sm">{s}</span>
+              ))}
+            </div>
+          )}
+          <ul>
+            {job.bullets.map((b) => (
+              <li>{b}</li>
+            ))}
+          </ul>
+        </article>
+      ))
+    }
+  </div>
+</Section>
