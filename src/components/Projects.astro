@@ -18,8 +18,12 @@ const leadershipArchive = archive.filter(
     /hackathon|leadership|social responsibility|fenty/i.test(p.name),
 );
 const technicalArchive = archive.filter((p) => !leadershipArchive.includes(p));
-const hasEarlier =
-  technicalArchive.length > 0 || leadershipArchive.length > 0 || !!data.mentorship;
+const carouselProjects = [...course, ...technicalArchive, ...leadershipArchive].sort((a, b) => {
+  const ao = Number(a.order ?? 0);
+  const bo = Number(b.order ?? 0);
+  if (ao !== bo) return ao - bo;
+  return (a.date ?? "").localeCompare(b.date ?? "");
+});
 const keyResults: Record<string, string> = {
   "Deepfake detection pipeline (video-level)":
     "Video-level aggregation with macro-F1 threshold tuning improved robustness across manipulation types.",
@@ -89,27 +93,27 @@ const highlightDetailsNames = new Set([
     )
   }
   {
-    course.length > 0 && (
+    carouselProjects.length > 0 && (
       <>
-        <h3 class="subsection-title">Machine Learning Projects</h3>
+        <h3 class="subsection-title">All Projects</h3>
         <div
           class="coursework-carousel"
           data-coursework-carousel
           tabindex="0"
           role="region"
           aria-roledescription="carousel"
-          aria-label="Machine learning projects carousel"
+          aria-label="All projects carousel"
         >
           <button
             type="button"
             class="carousel-nav carousel-prev"
-            aria-label="Previous machine learning project"
+            aria-label="Previous project"
           >
             <span aria-hidden="true">‹</span>
           </button>
           <div class="carousel-viewport">
             <div class="carousel-track" data-carousel-track>
-              {course.map((p) => (
+              {carouselProjects.map((p) => (
                 <div class="carousel-slide" data-carousel-slide>
                   <ProjectCard project={p} />
                 </div>
@@ -119,7 +123,7 @@ const highlightDetailsNames = new Set([
           <button
             type="button"
             class="carousel-nav carousel-next"
-            aria-label="Next machine learning project"
+            aria-label="Next project"
           >
             <span aria-hidden="true">›</span>
           </button>
@@ -148,7 +152,7 @@ const highlightDetailsNames = new Set([
                 var dot = document.createElement("button");
                 dot.type = "button";
                 dot.className = "carousel-dot" + (d === 0 ? " is-active" : "");
-                dot.setAttribute("aria-label", "Show machine learning project " + (d + 1));
+                dot.setAttribute("aria-label", "Show project " + (d + 1));
                 dot.setAttribute("data-carousel-index", String(d));
                 dotsHost.appendChild(dot);
               }
@@ -183,7 +187,7 @@ const highlightDetailsNames = new Set([
                 updateDots();
                 root.setAttribute(
                   "aria-label",
-                  "Machine learning projects carousel, slide " + (index + 1) + " of " + n,
+                  "All projects carousel, slide " + (index + 1) + " of " + n,
                 );
               }
 
@@ -230,25 +234,3 @@ const highlightDetailsNames = new Set([
     )
   }
 </Section>
-
-{
-  hasEarlier && (
-    <Section
-      id="earlier-work"
-      title="Earlier work & extras"
-    >
-      {technicalArchive.length > 0 && <h3 class="subsection-title">Technical Projects</h3>}
-      <div class="projects-grid">
-        {technicalArchive.map((p) => (
-          <ProjectCard project={p} compact={true} />
-        ))}
-      </div>
-      {leadershipArchive.length > 0 && <h3 class="subsection-title">Leadership & Community</h3>}
-      <div class="projects-grid">
-        {leadershipArchive.map((p) => (
-          <ProjectCard project={p} compact={true} />
-        ))}
-      </div>
-    </Section>
-  )
-}
