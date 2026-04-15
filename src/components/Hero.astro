@@ -11,10 +11,7 @@ const based = `Based in ${location.city}, ${location.country}`;
 
 <section class="hero" id="home">
   <div class="wrap hero-grid">
-    <div class="avatar">
-      <img src="/profile.png" alt={`${name} profile photo`} width="140" height="140" />
-    </div>
-    <div>
+    <div class="hero-content">
       <h1>{name}</h1>
       <p class="hero-based">{based}</p>
       <p class="tagline">{hero.tagline}</p>
@@ -32,6 +29,9 @@ const based = `Based in ${location.city}, ${location.country}`;
         )}
         <a class="btn" href="/resume.pdf" download>Download resume</a>
       </div>
+    </div>
+    <div class="avatar">
+      <img src="/profile.png" alt={`${name} profile photo`} width="220" height="220" />
     </div>
   </div>
 </section>

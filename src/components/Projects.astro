@@ -11,13 +11,44 @@ const byKind = (k: string) => data.projects.filter((p) => p.kind === k);
 const featured = byKind("featured");
 const course = byKind("course");
 const archive = byKind("archive");
-const hasEarlier = archive.length > 0 || !!data.mentorship;
+const leadershipArchive = archive.filter(
+  (p) =>
+    p.badge_label === "Community" ||
+    p.badge_label === "Business" ||
+    /hackathon|leadership|social responsibility|fenty/i.test(p.name),
+);
+const technicalArchive = archive.filter((p) => !leadershipArchive.includes(p));
+const hasEarlier =
+  technicalArchive.length > 0 || leadershipArchive.length > 0 || !!data.mentorship;
+const keyResults: Record<string, string> = {
+  "Deepfake detection pipeline (video-level)":
+    "Video-level aggregation with macro-F1 threshold tuning improved robustness across manipulation types.",
+  "Diabetes prediction with MLflow":
+    "Best run reached about 72% F1 with tracked, reproducible experiments.",
+  "Azerbaijani news classification (TF–IDF)":
+    "Linear SVM reached about 83.2% test accuracy on six classes.",
+  "Large-scale Cover_Type modeling":
+    "Ensemble setup delivered around 95% validation accuracy at scale.",
+};
+const highlightSummaries: Record<string, string> = {
+  "Deepfake detection pipeline (video-level)":
+    "Built a video-level deepfake detector with ResNet50 embeddings and classical ML models, focusing on temporal inconsistencies instead of static artifacts.",
+  "Diabetes prediction with MLflow":
+    "Delivered an end-to-end diabetes prediction workflow with MLflow tracking, model comparison, and reproducible experiment runs.",
+  "Azerbaijani news classification (TF–IDF)":
+    "Implemented multi-class Azerbaijani news classification with structured preprocessing, TF-IDF extraction, and model evaluation.",
+  "Large-scale Cover_Type modeling":
+    "Modeled forest cover type on a large dataset using scalable preprocessing and ensemble-focused optimization.",
+};
+const highlightDetailsNames = new Set([
+  "Deepfake detection pipeline (video-level)",
+  "Diabetes prediction with MLflow",
+]);
 ---
 
 <Section
   id="work"
   title="Selected work"
-  intro="A mix of research-style builds, course deliverables, and experiments. Each card is written for the web—not copied verbatim from a CV."
 >
   {
     featured.length > 0 && (
@@ -25,7 +56,33 @@ const hasEarlier = archive.length > 0 || !!data.mentorship;
         <h3 class="subsection-title">Highlights</h3>
         <div class="projects-grid">
           {featured.map((p) => (
-            <ProjectCard project={p} />
+            <article class="card project-card featured-ml-card" tabindex="0">
+              <h3>{p.name}</h3>
+              <p class="card-meta">{p.date}</p>
+              <p class="project-summary">
+                {highlightSummaries[p.name] ?? p.lede}
+              </p>
+              <p class="project-key-result">
+                <strong>Key result:</strong> {keyResults[p.name] ?? "Reliable baseline with clear evaluation and reproducible setup."}
+              </p>
+              {p.stack && p.stack.length > 0 && (
+                <div class="chips project-stack">
+                  {p.stack.map((s) => (
+                    <span class="chip chip-sm">{s}</span>
+                  ))}
+                </div>
+              )}
+              {highlightDetailsNames.has(p.name) && p.bullets.length > 0 && (
+                <details class="project-details">
+                  <summary class="project-details-summary">Details</summary>
+                  <ul class="project-bullet-list">
+                    {p.bullets.map((b) => (
+                      <li>{b}</li>
+                    ))}
+                  </ul>
+                </details>
+              )}
+            </article>
           ))}
         </div>
       </>
@@ -34,26 +91,19 @@ const hasEarlier = archive.length > 0 || !!data.mentorship;
   {
     course.length > 0 && (
       <>
-        <h3 class="subsection-title">Coursework</h3>
-        <p class="section-intro coursework-intro">
-          Six applied builds from ADA coursework—four in machine learning, one in
-          artificial intelligence (MDP planning and reinforcement learning), and one in
-          data engineering (historical football analysis). Each card ties the brief to what
-          shipped in code and notebooks, with numbers taken from saved runs where they
-          exist.
-        </p>
+        <h3 class="subsection-title">Machine Learning Projects</h3>
         <div
           class="coursework-carousel"
           data-coursework-carousel
           tabindex="0"
           role="region"
           aria-roledescription="carousel"
-          aria-label="Coursework projects carousel"
+          aria-label="Machine learning projects carousel"
         >
           <button
             type="button"
             class="carousel-nav carousel-prev"
-            aria-label="Previous coursework project"
+            aria-label="Previous machine learning project"
           >
             <span aria-hidden="true">‹</span>
           </button>
@@ -69,16 +119,12 @@ const hasEarlier = archive.length > 0 || !!data.mentorship;
           <button
             type="button"
             class="carousel-nav carousel-next"
-            aria-label="Next coursework project"
+            aria-label="Next machine learning project"
           >
             <span aria-hidden="true">›</span>
           </button>
           <div class="carousel-dots" data-carousel-dots></div>
         </div>
-        <p class="coursework-carousel-hint">
-          Carousel: use the side arrows or the dots below. When the frame is focused,
-          use the left and right arrow keys on the keyboard.
-        </p>
         <script is:inline>
           (function () {
             function boot() {
@@ -102,7 +148,7 @@ const hasEarlier = archive.length > 0 || !!data.mentorship;
                 var dot = document.createElement("button");
                 dot.type = "button";
                 dot.className = "carousel-dot" + (d === 0 ? " is-active" : "");
-                dot.setAttribute("aria-label", "Show coursework project " + (d + 1));
+                dot.setAttribute("aria-label", "Show machine learning project " + (d + 1));
                 dot.setAttribute("data-carousel-index", String(d));
                 dotsHost.appendChild(dot);
               }
@@ -137,7 +183,7 @@ const hasEarlier = archive.length > 0 || !!data.mentorship;
                 updateDots();
                 root.setAttribute(
                   "aria-label",
-                  "Coursework projects carousel, slide " + (index + 1) + " of " + n,
+                  "Machine learning projects carousel, slide " + (index + 1) + " of " + n,
                 );
               }
 
@@ -190,24 +236,18 @@ const hasEarlier = archive.length > 0 || !!data.mentorship;
     <Section
       id="earlier-work"
       title="Earlier work & extras"
-      intro="Older builds and community work—still part of the story, just not the main ML thread above."
     >
+      {technicalArchive.length > 0 && <h3 class="subsection-title">Technical Projects</h3>}
       <div class="projects-grid">
-        {archive.map((p) => (
-          <ProjectCard project={p} />
+        {technicalArchive.map((p) => (
+          <ProjectCard project={p} compact={true} />
         ))}
-        {data.mentorship && (
-          <article class="card project-card">
-            <span class="badge-role">Community</span>
-            <h3>{data.mentorship.title}</h3>
-            <p class="project-lede">{data.mentorship.summary}</p>
-            <ul>
-              {data.mentorship.bullets.map((b) => (
-                <li>{b}</li>
-              ))}
-            </ul>
-          </article>
-        )}
+      </div>
+      {leadershipArchive.length > 0 && <h3 class="subsection-title">Leadership & Community</h3>}
+      <div class="projects-grid">
+        {leadershipArchive.map((p) => (
+          <ProjectCard project={p} compact={true} />
+        ))}
       </div>
     </Section>
   )

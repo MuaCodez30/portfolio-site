@@ -7,13 +7,12 @@ interface Props {
 }
 const { data } = Astro.props;
 const { contact, location } = data;
-const address = `${location.street}, ${location.city}, ${location.country} ${location.postal}`;
+const address = `${location.city}, ${location.country}, ${location.postal.replace(/\s+/g, "")}`;
 ---
 
 <Section
   id="contact"
   title="Contact"
-  intro="Fastest path is email—I'll add a form here later if traffic picks up."
 >
   <div class="contact-grid">
     <div class="card">
@@ -24,27 +23,10 @@ const address = `${location.street}, ${location.city}, ${location.country} ${loc
           {contact.email}
         </a>
         <a class="btn" href={`tel:${contact.phone.replace(/\s/g, "")}`}>{contact.phone}</a>
-        <button class="btn" type="button" data-copy-email={contact.email}>
-          Copy email
-        </button>
+        <a class="btn" href={data.social.linkedin} target="_blank" rel="noopener noreferrer">
+          LinkedIn
+        </a>
       </div>
-      <p id="copy-status" style="min-height: 1.25rem; margin: 0.75rem 0 0; font-size: 0.9rem; color: var(--muted);" aria-live="polite" />
-      <p class="contact-note">Prefer email for anything longer than a quick hello.</p>
     </div>
   </div>
 </Section>
-
-<script is:inline>
-  const btn = document.querySelector("[data-copy-email]");
-  const status = document.getElementById("copy-status");
-  btn?.addEventListener("click", async () => {
-    const email = btn.getAttribute("data-copy-email");
-    if (!email) return;
-    try {
-      await navigator.clipboard.writeText(email);
-      if (status) status.textContent = "Copied to clipboard.";
-    } catch {
-      if (status) status.textContent = "Could not copy — select the email manually.";
-    }
-  });
-</script>

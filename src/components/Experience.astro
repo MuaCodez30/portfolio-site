@@ -12,12 +12,11 @@ const { data } = Astro.props;
 <Section
   id="experience"
   title="Experience"
-  intro="Internships, analyst work, and founder-side shipping—details below stay concrete even when the role was broad."
 >
   <div class="grid-2">
     {
       data.experience.map((job) => (
-        <article class="card">
+        <article class="card experience-card">
           <h3>
             {job.title} — {job.company}
           </h3>
@@ -32,11 +31,16 @@ const { data } = Astro.props;
               ))}
             </div>
           )}
-          <ul>
-            {job.bullets.map((b) => (
-              <li>{b}</li>
-            ))}
-          </ul>
+          {job.bullets.length > 0 && (
+            <details class="project-details">
+              <summary class="project-details-summary">Details</summary>
+              <ul class="project-bullet-list">
+                {job.bullets.map((b) => (
+                  <li>{b}</li>
+                ))}
+              </ul>
+            </details>
+          )}
         </article>
       ))
     }

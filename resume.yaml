@@ -4,9 +4,9 @@
 name: Muaataz Ismaeel
 
 hero:
-  tagline: Applied ML, data pipelines, and clear evaluation
-  subtagline: I like problems where the hard part is the data—not just picking a model off the shelf.
-  intro: I am finishing a BSc in Computer Science at ADA University (Baku). On a good week I am shipping notebooks that turn into small pipelines, charts that answer a real question, and writeups honest about limitations.
+  tagline: Applied Machine Learning | Machine Learning Engineer
+  subtagline: Building end-to-end ML systems from data preprocessing to model evaluation.
+  intro: Computer Science student at ADA University focused on practical, scalable machine learning solutions for real-world problems.
 
 social:
   linkedin: "https://www.linkedin.com/in/muaataz-ismaeel-305680199/"
@@ -34,11 +34,6 @@ education:
     degree: Bachelor of Science in Computer Science
     location: Baku, Azerbaijan
     expected: May 2026
-    focus: Coursework-heavy track in ML, data engineering, and analytics
-    summary: ADA is where I went from “code that runs” to “pipelines I trust”—versioned experiments, structured evaluation, and communicating trade-offs in plain language.
-    highlights:
-      - "Representative courses: Data & Information Engineering, Machine Learning, Artificial Intelligence, Big Data Analytics"
-      - "Comfortable working in Python-first stacks with notebooks, small services, and Git for collaboration"
   - institution: British School in Baku (NCUK Foundation year)
     location: Baku, Azerbaijan
     end: June 2022
@@ -77,21 +72,23 @@ experience:
       - Partnered with colleagues to turn ad-hoc questions into small, repeatable report views instead of one-off fire drills.
 
 projects:
-  - name: Fake news detection pipeline (SDP)
+  - name: Deepfake detection pipeline (video-level)
     kind: featured
     date: "2025-10"
     order: 1
-    context: ADA University · software project · text and data pipeline
-    lede: Built a repeatable path from messy inputs to trained models, then judged quality with precision, recall, and F1—not a single accuracy score in isolation.
+    context: ADA University · applied ML project · video-level deepfake classification
+    lede: Engineered a video-level deepfake detection system using ResNet50 feature extraction plus classical ML classifiers, prioritizing temporal inconsistency modeling over static frame artifacts.
     stack:
       - Python
+      - ResNet50
       - scikit-learn
-      - TF–IDF
       - Pandas
+      - NumPy
     bullets:
-      - Ingestion, cleaning, and vectorization were wired so every training run saw the same preprocessing rules.
-      - Reported precision, recall, F1, and confusion matrices; tightened preprocessing when errors clustered on specific patterns.
-      - Train and test splits plus saved transforms so the project could scale to more data without starting over.
+      - Designed a leakage-resistant data pipeline with source-aware, graph-based splitting to prevent identity overlap across train, validation, and test sets for realistic evaluation.
+      - Built temporal features from overlapping frame windows and frame-differencing embeddings, improving generalization across manipulation techniques while reducing overfitting to frame-level noise.
+      - Trained and compared classical classifiers on extracted embeddings (SVM, logistic regression, and MLP), with macro-F1-oriented validation and threshold calibration.
+      - Delivered an end-to-end reproducible pipeline with feature caching and video-level aggregation, ensuring consistent behavior from training through deployment-ready inference.
 
   - name: Diabetes prediction with MLflow
     kind: featured
@@ -122,15 +119,15 @@ projects:
       - Web app prototyping
       - Live pitch / demo
     bullets:
-      - Led workflow and delivery decisions during the sprint: scoped what had to ship, set priorities, and kept execution aligned with the demo deadline.
+      - "Led workflow and delivery decisions during the sprint: scoped what had to ship, set priorities, and kept execution aligned with the demo deadline."
       - Framed the threat model around prompt-injection and sensitive-data leakage, then translated that into practical checks and user-facing guardrails.
       - Owned the final presentation and walkthrough, explaining the risk scenarios, what the prototype blocked, and where a production version would need deeper security hardening.
       - Shipped a working proof-of-concept with the team in one day; we did not place in the top winners, but delivered a credible solution under real time pressure.
 
   - name: Football data analysis (international matches)
-    kind: course
+    kind: archive
     date: "2023-03"
-    order: 0
+    order: 34
     context: ADA University · Data & Information Engineering · international football results analysis
     lede: Built a notebook-based analysis suite over historical international match data to answer practical questions on team dominance, penalty performance, friendly-match activity, and top scorers.
     stack:
@@ -188,7 +185,7 @@ projects:
     bullets:
       - Kept memory and runtime under control while training strong baselines on hundreds of thousands of rows.
       - Random forest reached about 95.0% validation accuracy; tuned soft voting edged slightly higher after dropping weaker voters.
-      - Contrasted single-tree behavior with bagging-style mini forests: average single-tree test accuracy near 82%, best single near 86%, majority vote near 85.9% on the same test split as in the notebook.
+      - "Contrasted single-tree behavior with bagging-style mini forests: average single-tree test accuracy near 82%, best single near 86%, majority vote near 85.9% on the same test split as in the notebook."
 
   - name: Azerbaijani news classification (TF–IDF)
     kind: course
@@ -208,9 +205,9 @@ projects:
       - Grid search nudged the tree and Bayes settings; added TruncatedSVD plus an interactive 3D scatter so category separation is visible, not only a table.
 
   - name: Cleaning robot gridworld (MDP + Q-learning)
-    kind: course
+    kind: archive
     date: "2025-05"
-    order: 5
+    order: 35
     context: ADA University · artificial intelligence coursework · grid robot, dirt cells, and obstacles
     lede: Modeled a cleaning robot on a grid with walls, dirt, and optional movement slip. Solved the full MDP with value iteration and policy iteration from JSON configs, logged timings and policy comparisons, then added tabular Q-learning with epsilon-greedy exploration and scripts to line results up against the planning baseline.
     stack:
@@ -254,10 +251,10 @@ projects:
     bullets:
       - Gathered and compared organization needs against team budget and project objectives, so purchases stayed practical and relevant to the center's priorities.
       - Helped run stakeholder communication and progress tracking (including regular WhatsApp updates), keeping the project coordinated despite schedule and topic-change pressure.
-      - Supported fundraising and procurement with evidence-backed delivery: 120 AZN in contributions plus a 10% supplier discount, then purchase and handover of requested toys and learning materials.
+      - "Supported fundraising and procurement with evidence-backed delivery: 120 AZN in contributions plus a 10% supplier discount, then purchase and handover of requested toys and learning materials."
       - Co-led the final center visit and project closure, collected qualitative feedback from staff/children, and documented lessons on time management, coordination, and resilience for future SRP cycles.
 
-  - name: Fenty Beauty business analysis (financial resource management)
+  - name: Fenty Beauty business analysis
     kind: archive
     date: "2025-10"
     order: 32
@@ -269,7 +266,7 @@ projects:
       - Comparative benchmarking
       - Report writing and presentation
     bullets:
-      - Owned the Financial Resource Management section: synthesized budget practices, funding structure, and financial health indicators from public business sources.
+      - "Owned the Financial Resource Management section: synthesized budget practices, funding structure, and financial health indicators from public business sources."
       - Analyzed how the Rihanna-LVMH joint-venture model, pricing position, and operating partnerships supported growth while balancing brand accessibility and premium positioning.
       - Consolidated evidence into a structured written report and presented the findings in class, focusing on clear assumptions, source traceability, and decision-relevant takeaways.
       - Framed limits explicitly (public-source data and market estimates) so conclusions stayed credible for an academic business analysis context.
@@ -287,7 +284,7 @@ projects:
       - 3D math and scene rendering
     bullets:
       - Owned rendering and scene setup responsibilities, including camera view/projection behavior and integration of core WebGL pipeline components.
-      - Implemented key gameplay systems: seeded world generation, sphere motion with friction/bounce behavior, and size-based absorption/collision logic.
+      - "Implemented key gameplay systems: seeded world generation, sphere motion with friction/bounce behavior, and size-based absorption/collision logic."
       - Added interaction and visual systems such as follow/pointer-lock camera controls, textured environment elements, and dynamic lighting updates.
       - Delivered a working team demo with configurable world regeneration controls, keeping the implementation reproducible for testing and presentation.
 
@@ -304,26 +301,27 @@ languages:
     level: Beginner (HSK2 pathway)
 
 skill_groups:
-  - name: ML & experimentation
+  - name: ML, DL & experimentation
     items:
       - Python
       - scikit-learn
+      - TensorFlow
+      - XGBoost
+      - TF-IDF
       - MLflow
+      - Cross-validation
       - Jupyter
+      - Git / GitHub
       - Train/validation discipline
   - name: Data wrangling & SQL
     items:
       - Pandas
       - NumPy
+      - matplotlib
+      - Plotly
       - SQL
       - Tableau
-      - Feature sanity checks (plots, simple stats)
-  - name: Engineering habits
-    items:
-      - Git / GitHub
-      - Reproducible notebooks
-      - Documentation readable by “future you”
-
+      - Data preprocessing
 activities:
   - title: Exploring AI – Training Series
     detail: Azerconnect Group · multi-day fundamentals, ethics, and applied AI talks; completed with certificate.

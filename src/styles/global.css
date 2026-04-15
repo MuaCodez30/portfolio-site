@@ -9,7 +9,7 @@
   --border: rgba(255, 255, 255, 0.08);
   --radius: 12px;
   --font: "Source Sans 3", system-ui, -apple-system, sans-serif;
-  --max: 960px;
+  --max: 1200px;
 }
 
 *,
@@ -47,7 +47,7 @@ img {
 }
 
 .wrap {
-  width: min(var(--max), 100% - 2rem);
+  width: min(var(--max), 100% - 1.25rem);
   margin-inline: auto;
 }
 
@@ -95,7 +95,7 @@ img {
 }
 
 .section {
-  padding: 4rem 0;
+  padding: 1.9rem 0;
   scroll-margin-top: 4.5rem;
 }
 
@@ -104,7 +104,7 @@ img {
 }
 
 .section-title {
-  margin: 0 0 1.5rem;
+  margin: 0 0 0.55rem;
   font-size: 1.35rem;
   font-weight: 700;
   letter-spacing: 0.04em;
@@ -126,17 +126,22 @@ img {
 
 @media (min-width: 720px) {
   .hero-grid {
-    grid-template-columns: auto 1fr;
+    grid-template-columns: minmax(0, 1.3fr) auto;
   }
 }
 
+.hero-content {
+  max-width: 74ch;
+}
+
 .avatar {
-  width: 140px;
-  height: 140px;
+  width: 220px;
+  height: 220px;
   border-radius: 50%;
   border: 3px solid var(--accent-soft);
   overflow: hidden;
   background: var(--surface);
+  justify-self: end;
 }
 
 .hero h1 {
@@ -155,7 +160,7 @@ img {
 .hero .sub {
   margin: 0 0 1.5rem;
   color: var(--muted);
-  max-width: 42ch;
+  max-width: 62ch;
 }
 
 .cta-row {
@@ -204,10 +209,19 @@ img {
 
 .project-card {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   transition:
     transform 0.22s ease,
     box-shadow 0.22s ease,
     border-color 0.22s ease;
+}
+
+.experience-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -241,7 +255,7 @@ img {
 }
 
 .project-details {
-  margin-top: 0.85rem;
+  margin-top: auto;
   padding-top: 0.85rem;
   border-top: 1px solid var(--border);
 }
@@ -257,6 +271,10 @@ img {
   justify-content: space-between;
   gap: 0.65rem;
   user-select: none;
+  border: none;
+  border-radius: 0;
+  padding: 0.45rem 0.65rem;
+  background: transparent;
 }
 
 .project-details-summary::-webkit-details-marker {
@@ -392,18 +410,30 @@ img {
 .contact-grid {
   display: grid;
   gap: 1.5rem;
+  max-width: 760px;
+  margin-inline: auto;
 }
 
 @media (min-width: 640px) {
   .contact-grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
   }
 }
 
 .contact-actions {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: 0.75rem;
+}
+
+#contact .section-title {
+  text-align: center;
+}
+
+#contact .card {
+  text-align: center;
 }
 
 .footer {
@@ -423,7 +453,7 @@ img {
 }
 
 .subsection-title {
-  margin: 2rem 0 1rem;
+  margin: 0.7rem 0 0.45rem;
   font-size: 1rem;
   font-weight: 700;
   color: var(--text);
@@ -442,8 +472,8 @@ img {
 
 .hero-intro {
   margin: 0 0 1.25rem;
-  max-width: 52ch;
-  color: var(--text);
+  max-width: 70ch;
+  color: #b8c2d7;
   line-height: 1.55;
 }
 
@@ -485,6 +515,32 @@ img {
   color: var(--muted);
 }
 
+.featured-ml-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.project-summary {
+  margin: 0.2rem 0 0.65rem;
+  color: var(--text);
+  line-height: 1.5;
+}
+
+.project-key-result {
+  margin: 0;
+  color: #dbe5f7;
+  font-size: 0.92rem;
+}
+
+.project-link-cta {
+  margin-top: 0.95rem;
+  width: fit-content;
+  border-bottom: 1px solid var(--accent);
+  color: var(--accent);
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
 .experience-summary,
 .education-summary {
   margin: 0 0 0.85rem;
@@ -507,6 +563,7 @@ img {
 .skill-group-grid {
   display: grid;
   gap: 1rem;
+  margin-bottom: 0.9rem;
 }
 
 @media (min-width: 720px) {
@@ -526,6 +583,7 @@ img {
   display: grid;
   gap: 0.5rem;
   max-width: 32rem;
+  margin: 0.35rem auto 0;
 }
 
 .lang-row {
@@ -549,6 +607,19 @@ img {
 .lang-level {
   font-size: 0.9rem;
   color: var(--muted);
+}
+
+.skills-languages-line {
+  margin: 0 0 0.15rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.skills-subtitle {
+  margin-top: 1.4rem;
+  padding-top: 0.45rem;
+  border-top: 1px solid var(--border);
+  text-align: center;
 }
 
 .activities-grid {
@@ -624,7 +695,7 @@ img {
 .carousel-slide {
   flex-shrink: 0;
   box-sizing: border-box;
-  padding: 0 0.15rem;
+  padding: 0;
 }
 
 .carousel-nav {
