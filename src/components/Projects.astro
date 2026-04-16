@@ -86,6 +86,11 @@ const highlightDetailsNames = new Set([
     carouselProjects.length > 0 && (
       <>
         <h3 class="subsection-title">Other projects</h3>
+        <div class="mobile-projects-list">
+          {carouselProjects.map((p) => (
+            <ProjectCard project={p} compact={true} />
+          ))}
+        </div>
         <div
           class="coursework-carousel"
           data-coursework-carousel

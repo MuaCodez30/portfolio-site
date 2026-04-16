@@ -193,6 +193,14 @@ img {
   text-decoration: none;
 }
 
+.btn,
+.nav-links a,
+.project-details-summary,
+.carousel-nav,
+.carousel-dot {
+  touch-action: manipulation;
+}
+
 .btn:hover {
   border-color: var(--accent);
   text-decoration: none;
@@ -859,6 +867,133 @@ img {
   color: var(--muted);
   max-width: 52ch;
   line-height: 1.45;
+}
+
+.mobile-projects-list {
+  display: none;
+}
+
+@media (max-width: 700px) {
+  .nav {
+    gap: 0.55rem;
+    padding: 0.55rem 0;
+  }
+
+  .nav-brand {
+    font-size: 0.95rem;
+  }
+
+  .nav-links {
+    width: 100%;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: 0.35rem;
+    padding-bottom: 0.1rem;
+  }
+
+  .nav-links::-webkit-scrollbar {
+    display: none;
+  }
+
+  .nav-links a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2rem;
+    white-space: nowrap;
+    padding: 0.25rem 0.6rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.02);
+    font-size: 0.82rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .section {
+    padding: 1.65rem 0;
+  }
+
+  .section-title {
+    margin-bottom: 0.8rem;
+    font-size: 1.1rem;
+  }
+
+  .hero {
+    padding: 3.35rem 0 2.1rem;
+  }
+
+  .hero-grid {
+    gap: 1.25rem;
+  }
+
+  .hero h1 {
+    font-size: clamp(1.65rem, 7vw, 2.1rem);
+    margin-bottom: 0.35rem;
+  }
+
+  .hero-about-title {
+    font-size: 1.02rem;
+    letter-spacing: 0.03em;
+    margin-bottom: 0.4rem;
+  }
+
+  .hero-cta-row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.5rem;
+    margin-top: 0.85rem;
+  }
+
+  .hero-cta-row .btn {
+    width: 100%;
+    min-height: 2.6rem;
+    font-size: 0.84rem;
+    padding: 0.5rem 0.7rem;
+  }
+
+  .avatar {
+    width: 170px;
+    height: 170px;
+  }
+
+  .card {
+    padding: 0.95rem 1rem;
+  }
+
+  .grid-2,
+  .projects-grid,
+  .skill-group-grid {
+    gap: 0.9rem;
+  }
+
+  .subsection-title {
+    margin: 1.15rem 0 0.7rem;
+  }
+
+  .project-summary,
+  .experience-summary,
+  .education-summary {
+    line-height: 1.45;
+  }
+
+  .coursework-carousel {
+    display: none;
+  }
+
+  .mobile-projects-list {
+    display: grid;
+    gap: 0.9rem;
+  }
+
+  .mobile-projects-list .project-lede {
+    margin-bottom: 0.5rem;
+  }
+
+  .contact-actions .btn {
+    min-height: 2.45rem;
+  }
 }
 
 @media (max-width: 520px) {
