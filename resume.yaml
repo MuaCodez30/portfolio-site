@@ -82,10 +82,9 @@ projects:
       - Pandas
       - NumPy
     bullets:
-      - Designed a leakage-resistant data pipeline with source-aware, graph-based splitting to prevent identity overlap across train, validation, and test sets for realistic evaluation.
-      - Built temporal features from overlapping frame windows and frame-differencing embeddings, improving generalization across manipulation techniques while reducing overfitting to frame-level noise.
-      - Trained and compared classical classifiers on extracted embeddings (SVM, logistic regression, and MLP), with macro-F1-oriented validation and threshold calibration.
-      - Delivered an end-to-end reproducible pipeline with feature caching and video-level aggregation, ensuring consistent behavior from training through deployment-ready inference.
+      - Built a video-level deepfake detection pipeline that decodes videos into frames, detects/aligned faces, and standardizes inputs for consistent downstream analysis.
+      - Extracted ResNet50-based frame embeddings and engineered temporal features across frames to capture inconsistencies over time instead of relying on single-image artifacts.
+      - Trained and evaluated classical ML classifiers on these video-level features, tuning hyperparameters, handling class imbalance, and comparing models using accuracy, F1-score, and targeted error analysis.
 
   - name: Diabetes prediction with MLflow
     kind: featured
