@@ -25,7 +25,7 @@ const { data } = Astro.props;
           </p>
           {job.summary && <p class="experience-summary">{job.summary}</p>}
           {job.stack && job.stack.length > 0 && (
-            <div class="chips" style="margin-bottom: 0.75rem;">
+            <div class="chips experience-stack">
               {job.stack.map((s) => (
                 <span class="chip chip-sm">{s}</span>
               ))}
