@@ -236,15 +236,6 @@ img {
   height: 100%;
 }
 
-/* Keep stack chips directly above the Details rule (no flex gap from margin-top: auto). */
-.experience-card .experience-stack {
-  margin-bottom: 0.65rem;
-}
-
-.experience-card .project-details {
-  margin-top: 0;
-}
-
 @media (prefers-reduced-motion: no-preference) {
   .project-card:hover {
     transform: translateY(-4px);
