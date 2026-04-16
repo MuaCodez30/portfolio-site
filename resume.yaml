@@ -285,10 +285,10 @@ skill_groups:
   - name: ML, DL & experimentation
     items:
       - Python
+      - Jupyter Notebook
       - scikit-learn
       - TensorFlow
       - MLflow
-      - Jupyter
       - Git / GitHub
   - name: Data wrangling & SQL
     items:
