@@ -190,6 +190,18 @@ img {
   text-decoration: none;
 }
 
+.btn .btn-icon {
+  width: 1.05em;
+  height: 1.05em;
+  flex-shrink: 0;
+}
+
+.btn-with-icon {
+  display: inline-flex;
+  align-items: center;
+  margin-inline-end: 0.4rem;
+}
+
 .btn-primary {
   background: var(--accent);
   color: #0c0f14;

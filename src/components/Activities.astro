@@ -12,13 +12,14 @@ const { data } = Astro.props;
   id="activities"
   title="Activities & certifications"
 >
-  <div class="activities-grid">
+  <ul class="activities-list">
     {
       data.activities.map((a) => (
-        <article class="card activity-card">
-          <h3 class="activity-title">{a.title}</h3>
-        </article>
+        <li class="activity-item">
+          <p class="activity-title">{a.title}</p>
+          {a.detail && <p class="activity-detail">{a.detail}</p>}
+        </li>
       ))
     }
-  </div>
+  </ul>
 </Section>

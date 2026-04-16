@@ -19,6 +19,9 @@ const leadershipArchive = archive.filter(
 );
 const technicalArchive = archive.filter((p) => !leadershipArchive.includes(p));
 const carouselProjects = [...course, ...technicalArchive, ...leadershipArchive].sort((a, b) => {
+  const priorityName = "Azerbaijani news classification (TF–IDF)";
+  if (a.name === priorityName && b.name !== priorityName) return -1;
+  if (b.name === priorityName && a.name !== priorityName) return 1;
   const ao = Number(a.order ?? 0);
   const bo = Number(b.order ?? 0);
   if (ao !== bo) return ao - bo;
