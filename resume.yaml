@@ -298,6 +298,8 @@ skill_groups:
       - Tableau
       - Data preprocessing
 activities:
+  - title: University Demo Day (SABAH.HUB)
+    detail: Presented our startup as Co-Founder & CTO at university demo day.
   - title: Cursor Hackathon Baku
     detail: Led team workflow and final presentation for a one-day prompt-risk guardrail prototype sprint.
   - title: Exploring AI – Training Series
@@ -307,4 +309,4 @@ activities:
   - title: Beijing City Walk – Cloud Hutong Tour
     detail: Short cultural immersion program (completion certificate).
   - title: ADA International Festival (12th edition)
-    detail: Volunteer-style representation supporting Iraq & India embassy booths—high-traffic, high-context communication.
+    detail: Represented Iraq and India embassy booths at ADA International Festival.
