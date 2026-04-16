@@ -85,14 +85,14 @@ const highlightDetailsNames = new Set([
   {
     carouselProjects.length > 0 && (
       <>
-        <h3 class="subsection-title">All Projects</h3>
+        <h3 class="subsection-title">Other projects</h3>
         <div
           class="coursework-carousel"
           data-coursework-carousel
           tabindex="0"
           role="region"
           aria-roledescription="carousel"
-          aria-label="All projects carousel"
+          aria-label="Other projects carousel"
         >
           <button
             type="button"
@@ -177,7 +177,7 @@ const highlightDetailsNames = new Set([
                 updateDots();
                 root.setAttribute(
                   "aria-label",
-                  "All projects carousel, slide " + (index + 1) + " of " + n,
+                  "Other projects carousel, slide " + (index + 1) + " of " + n,
                 );
               }
 
