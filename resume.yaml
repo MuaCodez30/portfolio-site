@@ -62,7 +62,7 @@ experience:
     summary: Short winter internship supporting internal analytics—lots of spreadsheet reality, with a push toward cleaner handoffs for reporting and dashboards.
     stack:
       - Excel / spreadsheets
-      - SQL (where used on the job)
+      - SQL
       - Internal reporting tools
     bullets:
       - Consolidated and cleaned multi-source operational data so downstream charts were trustworthy enough for recurring reviews.
