@@ -5,11 +5,12 @@ interface Props {
   data: SiteData;
 }
 const { data } = Astro.props;
-const { name, hero, contact, social, location } = data;
+const { name, contact, social, location, about } = data;
 const based = `Based in ${location.city}, ${location.country}`;
 const base = import.meta.env.BASE_URL.replace(/\/?$/, "/");
 const resumeHref = `${base}resume.pdf`;
 const profileSrc = `${base}profile.png`;
+const isLorem = (p: string) => p.toLowerCase().includes("lorem ipsum");
 ---
 
 <section class="hero" id="home">
@@ -17,10 +18,17 @@ const profileSrc = `${base}profile.png`;
     <div class="hero-content">
       <h1>{name}</h1>
       <p class="hero-based">{based}</p>
-      <p class="tagline">{hero.tagline}</p>
-      <p class="sub">{hero.subtagline}</p>
-      {hero.intro && <p class="hero-intro">{hero.intro}</p>}
-      <div class="cta-row">
+      <div id="about" class="hero-about">
+        <h2 class="hero-about-title">About me</h2>
+        <div class="about-blurb hero-about-blurb">
+          {
+            about.paragraphs.map((p) => (
+              <p class={isLorem(p) ? "lorem" : undefined}>{p}</p>
+            ))
+          }
+        </div>
+      </div>
+      <div class="cta-row hero-cta-row">
         <a class="btn btn-primary" href={`mailto:${contact.email}`}>
           <span class="btn-with-icon" aria-hidden="true">
             <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

@@ -142,6 +142,14 @@ img {
   overflow: hidden;
   background: var(--surface);
   justify-self: end;
+  align-self: center;
+}
+
+@media (max-width: 719px) {
+  .avatar {
+    justify-self: center;
+    margin-inline: auto;
+  }
 }
 
 .hero h1 {
@@ -394,6 +402,18 @@ img {
   color: var(--text);
 }
 
+.about-blurb {
+  max-width: 58ch;
+  display: grid;
+  gap: 0.85rem;
+}
+
+.about-blurb p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
 .about-columns {
   display: grid;
   gap: 1.5rem;
@@ -503,9 +523,31 @@ img {
 }
 
 .hero-based {
-  margin: 0 0 0.35rem;
+  margin: 0 0 0.85rem;
   font-size: 0.95rem;
   color: var(--muted);
+}
+
+.hero-about {
+  scroll-margin-top: 4.5rem;
+  margin-bottom: 0.15rem;
+}
+
+.hero-about-title {
+  margin: 0 0 0.5rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.hero-about-blurb {
+  max-width: 58ch;
+}
+
+.hero-cta-row {
+  margin-top: 1.05rem;
 }
 
 .hero-intro {

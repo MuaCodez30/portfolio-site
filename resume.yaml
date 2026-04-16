@@ -4,9 +4,8 @@
 name: Muaataz Ismaeel
 
 hero:
-  tagline: Applied Machine Learning | Machine Learning Engineer
-  subtagline: Building end-to-end ML systems from data preprocessing to model evaluation.
-  intro: Computer Science student at ADA University focused on practical, scalable machine learning solutions for real-world problems.
+  tagline: ""
+  subtagline: ""
 
 social:
   linkedin: "https://www.linkedin.com/in/muaataz-ismaeel-305680199/"
@@ -14,7 +13,8 @@ social:
 
 about:
   paragraphs:
-    - Applied ML-focused Computer Science student building practical, end-to-end systems from data preparation to reliable model evaluation.
+    - Computer Science student at ADA University, focused on applied machine learning—end-to-end work from solid data preparation to evaluation you can trust, not just one-off demos.
+    - Interested in internships and junior ML or data roles where the problem, data, and metrics are defined clearly.
 
 location:
   street: Besti Bagirova 2
