@@ -236,15 +236,6 @@ img {
   height: 100%;
 }
 
-/* Match chip-to-Details spacing on both cards (avoid margin-top:auto gap on shorter card). */
-.experience-card .experience-stack {
-  margin-bottom: 0.75rem;
-}
-
-.experience-card .project-details {
-  margin-top: 0;
-}
-
 @media (prefers-reduced-motion: no-preference) {
   .project-card:hover {
     transform: translateY(-4px);
