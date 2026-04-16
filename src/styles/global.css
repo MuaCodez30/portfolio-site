@@ -869,10 +869,6 @@ img {
   line-height: 1.45;
 }
 
-.mobile-projects-list {
-  display: none;
-}
-
 @media (max-width: 700px) {
   .nav {
     gap: 0.55rem;
@@ -979,16 +975,30 @@ img {
   }
 
   .coursework-carousel {
+    margin-top: 0.2rem;
+    margin-bottom: 0.6rem;
+    padding: 0.2rem 0;
+    gap: 0.7rem 0.5rem;
+  }
+
+  .coursework-carousel .project-card {
+    padding: 0.9rem 0.95rem;
+  }
+
+  .coursework-carousel .project-context {
     display: none;
   }
 
-  .mobile-projects-list {
-    display: grid;
-    gap: 0.9rem;
+  .coursework-carousel .project-lede {
+    margin-bottom: 0.55rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
-  .mobile-projects-list .project-lede {
-    margin-bottom: 0.5rem;
+  .coursework-carousel .project-details-summary {
+    padding: 0.35rem 0.45rem;
   }
 
   .contact-actions .btn {
