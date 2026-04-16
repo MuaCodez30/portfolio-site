@@ -27,16 +27,6 @@ const carouselProjects = [...course, ...technicalArchive, ...leadershipArchive].
   if (ao !== bo) return ao - bo;
   return (a.date ?? "").localeCompare(b.date ?? "");
 });
-const keyResults: Record<string, string> = {
-  "Deepfake detection pipeline (video-level)":
-    "Video-level aggregation with macro-F1 threshold tuning improved robustness across manipulation types.",
-  "Diabetes prediction with MLflow":
-    "Best run reached about 72% F1 with tracked, reproducible experiments.",
-  "Azerbaijani news classification (TF–IDF)":
-    "Linear SVM reached about 83.2% test accuracy on six classes.",
-  "Large-scale Cover_Type modeling":
-    "Ensemble setup delivered around 95% validation accuracy at scale.",
-};
 const highlightSummaries: Record<string, string> = {
   "Deepfake detection pipeline (video-level)":
     "Built a video-level deepfake detector with ResNet50 embeddings and classical ML models, focusing on temporal inconsistencies instead of static artifacts.",
@@ -68,9 +58,6 @@ const highlightDetailsNames = new Set([
               <p class="card-meta">{p.date}</p>
               <p class="project-summary">
                 {highlightSummaries[p.name] ?? p.lede}
-              </p>
-              <p class="project-key-result">
-                <strong>Key result:</strong> {keyResults[p.name] ?? "Reliable baseline with clear evaluation and reproducible setup."}
               </p>
               {p.stack && p.stack.length > 0 && (
                 <div class="chips project-stack">
