@@ -7,6 +7,8 @@ interface Props {
 const { data } = Astro.props;
 const { name, hero, contact, social, location } = data;
 const based = `Based in ${location.city}, ${location.country}`;
+const base = import.meta.env.BASE_URL.replace(/\/?$/, "/");
+const resumeHref = `${base}resume.pdf`;
 ---
 
 <section class="hero" id="home">
@@ -27,7 +29,9 @@ const based = `Based in ${location.city}, ${location.country}`;
             GitHub
           </a>
         )}
-        <a class="btn" href="/resume.pdf" download>Download resume</a>
+        <a class="btn" href={resumeHref} download>
+          Download resume
+        </a>
       </div>
     </div>
     <div class="avatar">
