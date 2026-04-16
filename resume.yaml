@@ -289,7 +289,7 @@ skill_groups:
       - TensorFlow
       - MLflow
       - Git / GitHub
-  - name: Data wrangling & SQL
+  - name: Data analysis & SQL
     items:
       - Pandas
       - NumPy
