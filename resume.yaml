@@ -14,9 +14,7 @@ social:
 
 about:
   paragraphs:
-    - I care about the boring parts—clean joins, reproducible splits, metric definitions that match the business question—because that is where ML projects usually succeed or quietly fail.
-    - I have worked across a short-lived marketplace startup, coursework builds, internship analytics, and side experiments; this site is the longer version of that story.
-    - If you are hiring for internships or junior ML / data roles, send something concrete you are building—I will read it.
+    - Applied ML-focused Computer Science student building practical, end-to-end systems from data preparation to reliable model evaluation.
 
 location:
   street: Besti Bagirova 2
@@ -34,10 +32,10 @@ education:
     degree: Bachelor of Science in Computer Science
     location: Baku, Azerbaijan
     expected: May 2026
-  - institution: British School in Baku (NCUK Foundation year)
+  - institution: British School in Baku (NCUK Foundation Year)
+    degree: Engineering and Science
     location: Baku, Azerbaijan
     end: June 2022
-    summary: Foundation year before university—strong general STEM prep and study habits that still pay off in dense technical reading and exam-style courses.
 
 experience:
   - company: DetalTap
@@ -106,23 +104,6 @@ projects:
       - Treated zeros in columns like glucose, BMI, and insulin as missing data and imputed before training, then held out a strict test set for honest numbers.
       - Tuned logistic regression, random forest, SVM, k-nearest neighbors, XGBoost, and Gaussian Naive Bayes. Best on the printed table was XGBoost at about 72% F1, 81% accuracy, 69% recall, and 76% precision on the test split.
       - Random forest landed near 69% F1 and 80% accuracy under the same protocol; weaker models (SVM near 61% F1) stayed in the write-up so the comparison stays credible.
-
-  - name: Cursor Hackathon Baku - prompt risk guardrail prototype
-    kind: archive
-    date: "2026-02"
-    order: 29
-    context: Cursor Hackathon Baku · ADA University · one-day team sprint
-    lede: Built and demoed a web app prototype that reviews user prompts before they reach an LLM, flagging risky instructions and accidental secret sharing (for example AWS keys) that could expose a startup's systems.
-    stack:
-      - Product strategy
-      - Security-focused prompt design
-      - Web app prototyping
-      - Live pitch / demo
-    bullets:
-      - "Led workflow and delivery decisions during the sprint: scoped what had to ship, set priorities, and kept execution aligned with the demo deadline."
-      - Framed the threat model around prompt-injection and sensitive-data leakage, then translated that into practical checks and user-facing guardrails.
-      - Owned the final presentation and walkthrough, explaining the risk scenarios, what the prototype blocked, and where a production version would need deeper security hardening.
-      - Shipped a working proof-of-concept with the team in one day; we did not place in the top winners, but delivered a credible solution under real time pressure.
 
   - name: Football data analysis (international matches)
     kind: archive
@@ -306,23 +287,20 @@ skill_groups:
       - Python
       - scikit-learn
       - TensorFlow
-      - XGBoost
-      - TF-IDF
       - MLflow
-      - Cross-validation
       - Jupyter
       - Git / GitHub
-      - Train/validation discipline
   - name: Data wrangling & SQL
     items:
       - Pandas
       - NumPy
       - matplotlib
-      - Plotly
       - SQL
       - Tableau
       - Data preprocessing
 activities:
+  - title: Cursor Hackathon Baku
+    detail: Led team workflow and final presentation for a one-day prompt-risk guardrail prototype sprint.
   - title: Exploring AI – Training Series
     detail: Azerconnect Group · multi-day fundamentals, ethics, and applied AI talks; completed with certificate.
   - title: Chinese Language Proficiency (HSK2)
