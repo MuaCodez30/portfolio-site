@@ -636,6 +636,39 @@ main {
   color: var(--muted);
 }
 
+.quote {
+  position: relative;
+  margin: 1.1rem 0 0;
+  padding: 1rem 1.1rem 1rem 1.25rem;
+  border-left: 2px solid var(--accent);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  background: var(--accent-soft);
+}
+
+.quote blockquote {
+  margin: 0;
+}
+
+.quote p {
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--text);
+}
+
+.quote figcaption {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.15rem 0.6rem;
+  margin-top: 0.6rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.quote figcaption span {
+  font-weight: 400;
+  color: var(--muted);
+}
+
 /* ---------- Project cards ---------- */
 .featured {
   display: grid;

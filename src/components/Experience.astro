@@ -38,6 +38,17 @@ const { items } = Astro.props;
               <li>{t}</li>
             ))}
           </ul>
+          {job.quote && (
+            <figure class="quote">
+              <blockquote>
+                <p>“{job.quote.text}”</p>
+              </blockquote>
+              <figcaption>
+                {job.quote.url ? <a class="inline-link" href={job.quote.url}>{job.quote.author}</a> : job.quote.author}
+                <span>{job.quote.role}</span>
+              </figcaption>
+            </figure>
+          )}
           {job.note && (
             <p class="fine">
               <Icon name="lock" size={13} /> {job.note}

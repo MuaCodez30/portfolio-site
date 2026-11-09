@@ -56,6 +56,11 @@ experience:
     bullets:
       - Benchmarked EdTech platforms on topics, pricing and enrollment trends, and turned the findings into positioning recommendations.
     tags: [Market research, EdTech]
+    quote:
+      text: "Muaataz is one of the best researchers I've ever met. He's fantastic to work with, very professional and organized. He puts together spectacular presentations and goes above and beyond in so many ways."
+      author: Kelly Kirk
+      role: Founder of Kelly Tutors · managed Muaataz directly · LinkedIn recommendation
+      url: "https://www.linkedin.com/in/muaataz-ismaeel-305680199/details/recommendations/"
 
   - company: DetalTap
     title: Co-Founder & CTO
@@ -75,18 +80,19 @@ publications:
     venue: NLPAI 2026 · Urumqi, China
     date: Jul 2026
     status: Accepted and presented · publication forthcoming
-    authors: Co-authored with A. Aliyev, B. Hasanov, I. Alishov, A. Huseynli, S. Rustamov
+    authors: Project lead · co-authored with A. Aliyev, B. Hasanov, I. Alishov, A. Huseynli, S. Rustamov
 
 featured:
   - name: Multimodal fake content detection
     date: May 2026
-    context: ADA University · applied ML project
+    context: Project lead · Senior Design Project, ADA University · 2 faculty supervisors
     metric: FaceForensics++
     lede: A video deepfake detector that looks for inconsistencies across frames instead of single-image artifacts, extended across video and text modalities.
     bullets:
       - Decodes videos into frames, detects and aligns faces, and standardizes inputs for consistent analysis.
       - Extracts ResNet50 frame embeddings and uses temporal differencing to capture inconsistencies over time.
       - Trains and compares classical ML classifiers on the video-level features, with hyperparameter tuning, class-imbalance handling and error analysis.
+      - Led the team under two faculty supervisors. The work became a paper accepted and presented at NLPAI 2026.
     tags: [Python, ResNet50, scikit-learn, pandas, NumPy]
     repo: "https://github.com/MuaCodez30/csci-4701-deepfake-detection"
 

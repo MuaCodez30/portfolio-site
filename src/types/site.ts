@@ -10,6 +10,7 @@ export type Experience = {
   note?: string;
   bullets: string[];
   tags: string[];
+  quote?: { text: string; author: string; role: string; url?: string };
 };
 
 export type Publication = {
