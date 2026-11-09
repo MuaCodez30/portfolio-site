@@ -1,29 +1,160 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { loadSite } from "../data/loadSite";
-import SiteNav from "../components/SiteNav.astro";
-import Hero from "../components/Hero.astro";
+import Sidebar from "../components/Sidebar.astro";
+import Section from "../components/Section.astro";
 import Experience from "../components/Experience.astro";
-import Projects from "../components/Projects.astro";
-import Education from "../components/Education.astro";
-import Skills from "../components/Skills.astro";
-import Activities from "../components/Activities.astro";
-import Contact from "../components/Contact.astro";
-import Footer from "../components/Footer.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import Icon from "../components/Icon.astro";
 
 const data = loadSite();
+const base = import.meta.env.BASE_URL.replace(/\/?$/, "/");
+const nav = [
+  { id: "about", label: "About" },
+  { id: "experience", label: "Experience" },
+  { id: "research", label: "Research" },
+  { id: "projects", label: "Projects" },
+  { id: "education", label: "Education & skills" },
+];
+const year = new Date().getFullYear();
 ---
 
-<BaseLayout title={`${data.name} — Portfolio`}>
-  <SiteNav brand={data.name} />
-  <main>
-    <Hero data={data} />
-    <Experience data={data} />
-    <Projects data={data} />
-    <Education data={data} />
-    <Skills data={data} />
-    <Activities data={data} />
-    <Contact data={data} />
-  </main>
-  <Footer name={data.name} />
+<BaseLayout
+  title={`${data.name} · AI Engineer`}
+  description={`${data.name}: AI engineer in Baku. CS at ADA University (Dec 2026), AI engineering intern at HAL-X, co-founder of QuickRecap. Projects in ML, NLP and deepfake detection.`}
+  person={{
+    name: data.name,
+    jobTitle: "AI Engineer Intern",
+    email: data.contact.email,
+    sameAs: [data.contact.github, data.contact.linkedin],
+    image: "profile.png",
+  }}
+>
+  <div class="backdrop" aria-hidden="true"></div>
+  <a class="skip" href="#content">Skip to content</a>
+
+  <div class="mbar">
+    <a class="mbar-name" href="#top">{data.name}</a>
+    <div class="mbar-actions">
+      <a class="btn btn-primary btn-sm" href={`${base}resume.pdf`} download="Muaataz-Ismaeel-CV.pdf">
+        <Icon name="download" size={15} /> CV
+      </a>
+      <button class="icon-btn theme-btn" type="button" data-theme-toggle aria-label="Toggle dark mode">
+        <span class="i-sun"><Icon name="sun" /></span><span class="i-moon"><Icon name="moon" /></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="shell" id="top">
+    <Sidebar data={data} nav={nav} />
+
+    <main id="content">
+      <Section id="about" num="01" title="About">
+        <div class="prose reveal">
+          {data.about.map((p) => <p>{p}</p>)}
+        </div>
+      </Section>
+
+      <Section id="experience" num="02" title="Experience">
+        <Experience items={data.experience} />
+      </Section>
+
+      <Section id="research" num="03" title="Research">
+        {
+          data.publications.map((pub) => (
+            <article class="card pub reveal">
+              <div class="card-head">
+                <span class="chip chip-accent">{pub.venue}</span>
+                <span class="card-date">{pub.date}</span>
+              </div>
+              <h3 class="card-title">{pub.title}</h3>
+              <p class="card-lede">{pub.status}</p>
+              <p class="card-context">{pub.authors}</p>
+            </article>
+          ))
+        }
+      </Section>
+
+      <Section id="projects" num="04" title="Projects">
+        <div class="featured">
+          {data.featured.map((p) => <ProjectCard project={p} featured />)}
+        </div>
+        <h3 class="sub-title">More projects</h3>
+        <div class="grid">
+          {data.projects.map((p) => <ProjectCard project={p} />)}
+        </div>
+      </Section>
+
+      <Section id="education" num="05" title="Education & skills">
+        <ul class="edu reveal">
+          {
+            data.education.map((e) => (
+              <li>
+                <div class="edu-row">
+                  <h3 class="job-title">{e.institution}</h3>
+                  <span class="card-date">{e.date}</span>
+                </div>
+                <p class="job-meta">{e.degree}</p>
+                {e.detail && <p class="card-context">{e.detail}</p>}
+              </li>
+            ))
+          }
+        </ul>
+
+        <dl class="skills reveal">
+          {
+            data.skills.map((s) => (
+              <div class="skill-row">
+                <dt>{s.group}</dt>
+                <dd>
+                  <ul class="tags">
+                    {s.items.map((i) => (
+                      <li>{i}</li>
+                    ))}
+                  </ul>
+                </dd>
+              </div>
+            ))
+          }
+          <div class="skill-row">
+            <dt>Languages</dt>
+            <dd>
+              <ul class="tags">
+                {
+                  data.languages.map((l) => (
+                    <li>
+                      {l.name} <span class="muted">· {l.level}</span>
+                    </li>
+                  ))
+                }
+              </ul>
+            </dd>
+          </div>
+        </dl>
+
+        <h3 class="sub-title">Activities</h3>
+        <ul class="activities reveal">
+          {
+            data.activities.map((a) => (
+              <li>
+                <strong>{a.title}</strong>
+                <span>{a.detail}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </Section>
+
+      <footer class="footer reveal">
+        <h2 class="footer-title">Let's build something useful.</h2>
+        <p class="muted">The fastest way to reach me is email.</p>
+        <div class="footer-actions">
+          <a class="btn btn-primary" href={`mailto:${data.contact.email}`}><Icon name="mail" size={17} /> {data.contact.email}</a>
+          <a class="btn" href={data.contact.linkedin}><Icon name="linkedin" size={16} /> LinkedIn</a>
+          <a class="btn" href={data.contact.github}><Icon name="github" size={16} /> GitHub</a>
+        </div>
+        <p class="fine">© {year} {data.name} · Last updated {data.updated}</p>
+      </footer>
+    </main>
+  </div>
 </BaseLayout>

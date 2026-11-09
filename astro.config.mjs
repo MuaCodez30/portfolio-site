@@ -4,4 +4,5 @@ export default defineConfig({
   output: "static",
   site: "https://muacodez30.github.io",
   base: "/portfolio-site",
+  build: { assets: "assets" },
 });

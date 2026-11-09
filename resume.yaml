@@ -1,311 +1,194 @@
-# Portfolio content (edit freely — does not have to match the PDF resume line-for-line).
-# PDF resume (optional sync): ../../Muaataz Ismaeel 2026 Resume - ML.pdf
+# Portfolio content — single source for the site.
+# Keep it in sync with the CV PDF in public/resume.pdf.
 
 name: Muaataz Ismaeel
+role: AI Engineer · ML & NLP
+lede: I build AI tools end to end, from the data to a working product, and I check that they actually work.
+status: Open to AI engineering roles
+location: Baku, Azerbaijan
+updated: November 2026
 
-hero:
-  tagline: ""
-  subtagline: ""
-
-social:
+contact:
+  email: muaataz56@gmail.com
   linkedin: "https://www.linkedin.com/in/muaataz-ismaeel-305680199/"
   github: "https://github.com/MuaCodez30"
 
 about:
-  paragraphs:
-    - Computer Science student at ADA University, focused on applied machine learning—end-to-end work from solid data preparation to evaluation you can trust, not just one-off demos.
-    - Interested in internships and junior ML or data roles where the problem, data, and metrics are defined clearly.
-
-location:
-  street: Besti Bagirova 2
-  city: Baku
-  country: Azerbaijan
-  postal: AZ 1065
-
-contact:
-  phone: "+994503258894"
-  email: mismaeel17637@ada.edu.az
-  linkedin_label: LinkedIn
-
-education:
-  - institution: ADA University
-    degree: Bachelor of Science in Computer Science
-    location: Baku, Azerbaijan
-    expected: May 2026
-  - institution: British School in Baku (NCUK Foundation Year)
-    degree: Engineering and Science
-    location: Baku, Azerbaijan
-    end: June 2022
+  - Computer Science student at ADA University, finishing my final course in December 2026, and AI engineering intern at HAL-X in Baku.
+  - I like building things end to end, from the data to a working tool. I use AI coding tools like Claude Code and Cursor to move fast, and then I check that the result actually works, with tests, held-out evaluation and independent re-checks.
+  - I'm looking for AI engineering roles where I can build useful tools and ship them.
 
 experience:
+  - company: HAL-X
+    title: AI Engineer Intern
+    location: Baku, Azerbaijan
+    start: Aug 2026
+    end: Present
+    note: Work under NDA. Details stay general.
+    bullets:
+      - Fine-tuned a multilingual transformer model that detects and masks personal data in documents across multiple languages, combined with a rules layer for structured formats.
+      - Built an LLM-based pipeline that generated a large labelled training dataset, with automated checks for label accuracy, duplicates and data leakage.
+      - Extended the dataset to new languages through a validated translation pipeline, and ran robustness tests on real-world documents and office file formats.
+      - Now developing a general-purpose AI decision model, building validation pipelines for large training datasets with Claude Code and checking AI-written code with independent re-checks.
+      - Coordinate a small team. I split the work, review and merge contributions, and write sprint plans.
+    tags: [Python, Hugging Face Transformers, LLM pipelines, Claude Code]
+
+  - company: QuickRecap
+    title: Co-Founder & CTO
+    location: Baku, Azerbaijan (hybrid)
+    start: Jun 2026
+    end: Present
+    url: "https://apps.apple.com/us/app/quickrecap/id6765835695"
+    url_label: App Store
+    metric: 1st place · University Demo Day
+    bullets:
+      - Building an AI podcast-summary product. Users share a Spotify or podcast link, choose a time range, and get a summary of the part they missed.
+      - Live on the App Store as a native iOS app (SwiftUI) with a companion website, with 150+ downloads. An Android version is releasing soon.
+      - Won 1st place at University Demo Day, hosted by SABAH.HUB and Baku ID.
+      - Summaries are generated with LLMs (Gemini and Grok). I set the product roadmap and UX direction.
+    tags: [SwiftUI, iOS, Gemini, Grok]
+
+  - company: Kelly Tutors
+    title: AI Education Research & Market Analyst Intern
+    location: Remote (USA)
+    start: May 2026
+    end: Aug 2026
+    bullets:
+      - Benchmarked EdTech platforms on topics, pricing and enrollment trends, and turned the findings into positioning recommendations.
+    tags: [Market research, EdTech]
+
   - company: DetalTap
     title: Co-Founder & CTO
     location: Baku, Azerbaijan (hybrid)
-    start: "2025-09"
-    end: "2026-02"
-    summary: Early-stage marketplace aimed at helping drivers find the right automotive parts faster—with clearer listings, less guesswork on fitment, and a product experience that could earn repeat use in the region.
-    stack:
-      - Product & platform architecture
-      - Marketplace / discovery UX
+    start: Sep 2025
+    end: Feb 2026
+    url: "https://github.com/MuaCodez30/Telegram_CarParts_Bot"
+    url_label: Telegram bot code
     bullets:
-      - Steered technical direction end to end—what we built first, what could wait, and how the stack had to scale if demand showed up.
-      - Shaped the core flows for search, trust, and seller onboarding so buyers were not left comparing opaque part numbers in isolation.
-      - Used modern AI tooling where it genuinely sped up iteration (drafting specs, tightening copy, automating repetitive checks) while keeping humans in the loop for anything safety- or fitment-critical.
-      - Worked shoulder-to-shoulder on UX and positioning so engineering choices matched how garages and car owners actually shop, not just a slick demo.
+      - Led technical direction for a car-parts marketplace. Started with a Telegram bot prototype for part requests.
+      - Then built a fully functional marketplace website with search, listings and seller onboarding. It was launch-ready but never launched publicly.
+      - Presented DetalTap at University Demo Day (SABAH.HUB × Baku ID).
+    tags: [Telegram bot, Marketplace web app, Product]
 
-  - company: Siesco MMC
-    title: Business Analyst Intern
-    location: Baku, Azerbaijan
-    start: "2025-12"
-    end: "2026-01"
-    summary: Short winter internship supporting internal analytics—lots of spreadsheet reality, with a push toward cleaner handoffs for reporting and dashboards.
-    stack:
-      - Excel / spreadsheets
-      - SQL
-      - Internal reporting tools
-    bullets:
-      - Consolidated and cleaned multi-source operational data so downstream charts were trustworthy enough for recurring reviews.
-      - Helped document transformation steps so the next person could rerun the workflow without reverse-engineering my files.
-      - Partnered with colleagues to turn ad-hoc questions into small, repeatable report views instead of one-off fire drills.
+publications:
+  - title: Multimodal Fake-Information Detection for Low-Resource Language in Case of Azerbaijani Language
+    venue: NLPAI 2026 · Urumqi, China
+    date: Jul 2026
+    status: Accepted and presented · publication forthcoming
+    authors: Co-authored with A. Aliyev, B. Hasanov, I. Alishov, A. Huseynli, S. Rustamov
 
-projects:
-  - name: Deepfake detection pipeline (video-level)
-    kind: featured
-    date: "2025-10"
-    order: 1
-    context: ADA University · applied ML project · video-level deepfake classification
-    lede: Engineered a video-level deepfake detection system using ResNet50 feature extraction plus classical ML classifiers, prioritizing temporal inconsistency modeling over static frame artifacts.
-    stack:
-      - Python
-      - ResNet50
-      - scikit-learn
-      - Pandas
-      - NumPy
+featured:
+  - name: Multimodal fake content detection
+    date: May 2026
+    context: ADA University · applied ML project
+    metric: FaceForensics++
+    lede: A video deepfake detector that looks for inconsistencies across frames instead of single-image artifacts, extended across video and text modalities.
     bullets:
-      - Built a video-level deepfake detection pipeline that decodes videos into frames, detects/aligned faces, and standardizes inputs for consistent downstream analysis.
-      - Extracted ResNet50-based frame embeddings and engineered temporal features across frames to capture inconsistencies over time instead of relying on single-image artifacts.
-      - Trained and evaluated classical ML classifiers on these video-level features, tuning hyperparameters, handling class imbalance, and comparing models using accuracy, F1-score, and targeted error analysis.
+      - Decodes videos into frames, detects and aligns faces, and standardizes inputs for consistent analysis.
+      - Extracts ResNet50 frame embeddings and uses temporal differencing to capture inconsistencies over time.
+      - Trains and compares classical ML classifiers on the video-level features, with hyperparameter tuning, class-imbalance handling and error analysis.
+    tags: [Python, ResNet50, scikit-learn, pandas, NumPy]
+    repo: "https://github.com/MuaCodez30/csci-4701-deepfake-detection"
 
   - name: Diabetes prediction with MLflow
-    kind: featured
-    date: "2025-07"
-    order: 2
-    context: ADA University · machine learning capstone · classic diabetes risk dataset (768 rows, eight health readings per person)
-    lede: "Team capstone predicting diabetes yes or no: six models, five-fold grid search with F1 as the score to beat, and MLflow so every run stayed traceable."
-    stack:
-      - Python
-      - scikit-learn
-      - XGBoost
-      - MLflow
-      - Jupyter
+    date: Jul 2025
+    context: ADA University · ML capstone · team project
+    metric: 72% F1 · XGBoost
+    lede: Predicting diabetes from 8 health readings per person. Six models, 5-fold grid search with F1 as the target, and every run tracked in MLflow.
     bullets:
-      - Treated zeros in columns like glucose, BMI, and insulin as missing data and imputed before training, then held out a strict test set for honest numbers.
-      - Tuned logistic regression, random forest, SVM, k-nearest neighbors, XGBoost, and Gaussian Naive Bayes. Best on the printed table was XGBoost at about 72% F1, 81% accuracy, 69% recall, and 76% precision on the test split.
-      - Random forest landed near 69% F1 and 80% accuracy under the same protocol; weaker models (SVM near 61% F1) stayed in the write-up so the comparison stays credible.
+      - Treated impossible zeros (glucose, BMI, insulin) as missing data and imputed them before training. Held out a strict test set.
+      - Best model was XGBoost at 72% F1, 81% accuracy, 69% recall and 76% precision on the test split. Random forest reached 69% F1.
+      - Weaker models stayed in the write-up (SVM at 61% F1) so the comparison stays honest.
+    tags: [Python, scikit-learn, XGBoost, MLflow]
+    note: Walkthrough on request
 
-  - name: Football data analysis (international matches)
-    kind: archive
-    date: "2023-03"
-    order: 34
-    context: ADA University · Data & Information Engineering · international football results analysis
-    lede: Built a notebook-based analysis suite over historical international match data to answer practical questions on team dominance, penalty performance, friendly-match activity, and top scorers.
-    stack:
-      - Python
-      - Pandas
-      - Jupyter
-      - CSV data analysis
-    bullets:
-      - Structured the work into focused notebooks (best international team, top goal scorers, most active friendlies, penalty strength, and match dominance) so each question had a clear analytic path.
-      - Used repeatable filtering and grouping in pandas to compare teams across selected ranges and match contexts, including home versus away and friendly-only slices.
-      - Grounded all queries in the Kaggle International Football Results (1872–2017) dataset, keeping assumptions explicit so conclusions stayed explainable.
+projects:
+  - name: Azerbaijani news classification
+    date: Apr 2025
+    metric: 83.2% test accuracy
+    lede: Six-way news topic classifier for Azerbaijani text using TF-IDF features. A linear SVM beat Naive Bayes (77.6%) and a decision tree (72.3%).
+    tags: [scikit-learn, TF-IDF, Plotly]
 
-  - name: Turbo.az price modeling from scratch
-    kind: course
-    date: "2025-02"
-    order: 1
-    context: ADA University · ML course · predicting car prices from real marketplace listings
-    lede: The brief asked for cleaned mileage and model year versus price in manat, three plots, hand-built gradient descent with a cost curve, then the same task with a standard library and with the closed-form normal equation. I delivered all three paths on messy listing data.
-    stack:
-      - Python
-      - NumPy
-      - Pandas
-      - matplotlib
-    bullets:
-      - Parsed mileage strings, normalized currencies to AZN, and used z-score scaling where the handout required it.
-      - Implemented linear regression with manual gradient descent and matched results against scikit-learn and a NumPy normal-equation solver.
-      - Drew 2D and 3D plots so price versus mileage and year stayed easy to sanity-check before trusting predictions.
+  - name: Forest cover type at scale
+    date: Apr 2025
+    metric: 95.1% val. accuracy
+    lede: About 500k rows and 54 features. Compared classifiers, then soft voting with weak voters removed. A second experiment majority-voted 1,200 tiny trees.
+    tags: [pandas, NumPy, scikit-learn]
 
-  - name: Logistic regression from scratch (exam scores)
-    kind: course
-    date: "2025-06"
-    order: 2
-    context: ADA University · ML course · predicting pass or fail from two exam scores
-    lede: Built logistic regression from scratch—sigmoid, log loss, batch gradient descent with a cost curve, decision boundary plot—then compared to scikit-learn on the same scaled data. My loop reached about 89% training accuracy; the library reached about 93% on that same matrix.
-    stack:
-      - Python
-      - NumPy
-      - matplotlib
-      - scikit-learn
-    bullets:
-      - Rescaled both exam features to zero-one range so gradient descent stayed stable, then logged cost across one hundred thousand small steps.
-      - Plotted admitted versus not admitted in color and overlaid the learned boundary in the normalized plane.
-      - Ran scikit-learn’s logistic regression as a check and discussed a borderline example where my probabilities and the library’s disagreed slightly.
+  - name: Logistic regression from scratch
+    date: Jun 2025
+    metric: 89% vs 93% scikit-learn
+    lede: Sigmoid, log loss and batch gradient descent written by hand, with a decision-boundary plot, then checked against scikit-learn on the same data.
+    tags: [NumPy, matplotlib]
 
-  - name: Large-scale Cover_Type modeling
-    kind: course
-    date: "2025-04"
-    order: 3
-    context: ADA University · ML course · forest cover types at large scale, plus a second “many small trees” experiment
-    lede: "First half: roughly half a million rows and fifty-four columns, several classifiers, then hard and soft voting while removing models that dragged accuracy down—best soft voting sat near 95.1% on validation in the saved notebook. Second half: grid-tuned decision trees, twelve hundred tiny models on random hundred-row samples, then a majority vote on the test set near 85.9% accuracy."
-    stack:
-      - Pandas
-      - NumPy
-      - scikit-learn
-    bullets:
-      - Kept memory and runtime under control while training strong baselines on hundreds of thousands of rows.
-      - Random forest reached about 95.0% validation accuracy; tuned soft voting edged slightly higher after dropping weaker voters.
-      - "Contrasted single-tree behavior with bagging-style mini forests: average single-tree test accuracy near 82%, best single near 86%, majority vote near 85.9% on the same test split as in the notebook."
+  - name: Turbo.az car price modeling
+    date: Feb 2025
+    metric: 3 solvers compared
+    lede: Car prices from messy real marketplace listings. Hand-written gradient descent, scikit-learn and the normal equation, cross-checked against each other.
+    tags: [NumPy, pandas, matplotlib]
 
-  - name: Azerbaijani news classification (TF–IDF)
-    kind: course
-    date: "2025-04"
-    order: 4
-    context: ADA University · ML course · six-way Azerbaijani news categories from headline plus body text
-    lede: Built bag-of-words and TF–IDF features, trained Naive Bayes, decision trees, and a linear support-vector classifier, ran a focused grid search, and added a three-dimensional embedding view for intuition. Strongest test accuracy in the saved run was the linear SVM at about 83.2%.
-    stack:
-      - Python
-      - scikit-learn
-      - TF–IDF
-      - pandas
-      - Plotly
-    bullets:
-      - Combined title and article text, dropped empty rows, and split into about eighty percent train and twenty percent test with class balance in mind.
-      - On TF–IDF features, Naive Bayes scored about 77.6% test accuracy, the tree about 72.3%, and the linear SVM about 83.2%, each with a full precision-recall table in the notebook.
-      - Grid search nudged the tree and Bayes settings; added TruncatedSVD plus an interactive 3D scatter so category separation is visible, not only a table.
+  - name: Cleaning robot (MDP + Q-learning)
+    date: May 2025
+    metric: Planning vs RL
+    lede: Grid robot with dirt, walls and movement slip. Solved with value and policy iteration, then compared against a tabular Q-learning agent.
+    tags: [Python, NumPy, Jupyter]
 
-  - name: Cleaning robot gridworld (MDP + Q-learning)
-    kind: archive
-    date: "2025-05"
-    order: 35
-    context: ADA University · artificial intelligence coursework · grid robot, dirt cells, and obstacles
-    lede: Modeled a cleaning robot on a grid with walls, dirt, and optional movement slip. Solved the full MDP with value iteration and policy iteration from JSON configs, logged timings and policy comparisons, then added tabular Q-learning with epsilon-greedy exploration and scripts to line results up against the planning baseline.
-    stack:
-      - Python
-      - NumPy
-      - Matplotlib
-      - Jupyter
-    bullets:
-      - States combine robot position with which dirt tiles are left; actions move or clean; rewards charge each step, pay off for cleaning, and penalize bumping obstacles, with stochastic slip driven from the config file.
-      - On the saved ten-by-ten experiment, value iteration finished in about two and a half seconds, policy iteration in about twelve seconds, and the two optimal policies disagreed on three hundred one states while the value gap in the log stayed near zero point zero zero two.
-      - Shipped a tabular Q-learning loop (roughly sixteen thousand Q entries in the saved RL log), notebooks, and plots; the saved RL evaluation still looks exploratory versus the planner, which matches the metrics file rather than claiming a tuned winning agent.
+  - name: Osmos 3D in WebGL
+    date: 2025
+    metric: Playable demo
+    lede: Team computer-graphics project. A browser 3D game with custom shaders, seeded world generation, collisions and camera controls.
+    tags: [JavaScript, WebGL, GLSL]
 
-  - name: Java book management system (team lead)
-    kind: archive
-    date: "2024-05"
-    order: 30
-    context: Earlier course · four-person team · desktop app
-    lede: Swing desktop app with real CRUD, auth, and teamwork discipline—different domain than my ML focus today, but good engineering practice.
-    stack:
-      - Java
-      - Swing
-      - Git
-    bullets:
-      - Led a four-person team through design, implementation, and demo-ready delivery with shared Git history and code review habits.
-      - Implemented authentication, CRUD flows, sorting/filtering, and defensive file I/O for persistent data.
-      - Produced UML and short internal docs so the project did not die the week after submission.
+  - name: International football analysis
+    date: Mar 2023
+    metric: 145 years of matches
+    lede: Notebook analysis of international results (1872–2017) covering team dominance, penalties, friendlies and top scorers.
+    tags: [pandas, Jupyter]
+    repo: "https://github.com/MuaCodez30/Football_Data_Analysis"
 
-  - name: Leadership & Ethics social responsibility initiative (Project Lead)
-    kind: archive
-    badge_label: Community
-    date: "2025-03"
-    order: 31
-    context: ADA University · COMM 2300 (Leadership, Ethics and Communication) · Social Responsibility Project with a Down syndrome center in Baku
-    lede: Co-led execution of a community-focused student project that moved from stakeholder outreach to fundraising, procurement, and an on-site delivery visit supporting children with Down syndrome.
-    stack:
-      - Project leadership
-      - Stakeholder communication
-      - Team coordination
-      - Fundraising and donation logistics
-      - Budget/needs alignment
-    bullets:
-      - Gathered and compared organization needs against team budget and project objectives, so purchases stayed practical and relevant to the center's priorities.
-      - Helped run stakeholder communication and progress tracking (including regular WhatsApp updates), keeping the project coordinated despite schedule and topic-change pressure.
-      - "Supported fundraising and procurement with evidence-backed delivery: 120 AZN in contributions plus a 10% supplier discount, then purchase and handover of requested toys and learning materials."
-      - Co-led the final center visit and project closure, collected qualitative feedback from staff/children, and documented lessons on time management, coordination, and resilience for future SRP cycles.
+  - name: Book management system
+    date: May 2024
+    metric: Led a team of 4
+    lede: Java Swing desktop app with authentication, CRUD, sorting and filtering, built with shared Git history and code reviews.
+    tags: [Java, Swing, Git]
 
-  - name: Fenty Beauty business analysis
-    kind: archive
-    date: "2025-10"
-    order: 32
-    context: ADA University · Fundamentals of Business (BUSA-1100) · team strategy report
-    lede: Delivered the financial resource management analysis for a team case study on Fenty Beauty, then translated findings into report-ready and presentation-ready business recommendations.
-    stack:
-      - Business analysis
-      - Financial analysis
-      - Comparative benchmarking
-      - Report writing and presentation
-    bullets:
-      - "Owned the Financial Resource Management section: synthesized budget practices, funding structure, and financial health indicators from public business sources."
-      - Analyzed how the Rihanna-LVMH joint-venture model, pricing position, and operating partnerships supported growth while balancing brand accessibility and premium positioning.
-      - Consolidated evidence into a structured written report and presented the findings in class, focusing on clear assumptions, source traceability, and decision-relevant takeaways.
-      - Framed limits explicitly (public-source data and market estimates) so conclusions stayed credible for an academic business analysis context.
+education:
+  - institution: ADA University
+    degree: B.Sc. Computer Science
+    date: Expected December 2026
+    detail: "Coursework: Machine Learning, Deep Learning, Artificial Intelligence, Computer Vision, Big Data Analytics, Data & Information Engineering"
+  - institution: British School in Baku
+    degree: Including NCUK Foundation Year
+    date: 2012 – 2022
+  - institution: Code Academy (Baku)
+    degree: Data Analytics course
+    date: In progress
 
-  - name: Computer Graphics team project - Osmos 3D (WebGL)
-    kind: archive
-    date: "2025"
-    order: 33
-    context: ADA University · Computer Graphics · team project
-    lede: Built a browser-based 3D Osmos-style simulation/game in WebGL, combining rendering systems, camera controls, and collision-driven gameplay into a playable demo.
-    stack:
-      - JavaScript
-      - WebGL
-      - GLSL shaders
-      - 3D math and scene rendering
-    bullets:
-      - Owned rendering and scene setup responsibilities, including camera view/projection behavior and integration of core WebGL pipeline components.
-      - "Implemented key gameplay systems: seeded world generation, sphere motion with friction/bounce behavior, and size-based absorption/collision logic."
-      - Added interaction and visual systems such as follow/pointer-lock camera controls, textured environment elements, and dynamic lighting updates.
-      - Delivered a working team demo with configurable world regeneration controls, keeping the implementation reproducible for testing and presentation.
+skills:
+  - group: ML & NLP
+    items: [Python, scikit-learn, TensorFlow, XGBoost, MLflow, Hugging Face Transformers]
+  - group: LLMs & AI tools
+    items: [OpenAI API, Gemini API, Grok API, Claude Code, Cursor]
+  - group: Data
+    items: [pandas, NumPy, SQL, Matplotlib, Tableau, Jupyter]
+  - group: Engineering
+    items: [Git / GitHub, JavaScript, TypeScript, SwiftUI, Java, WebGL / GLSL]
 
 languages:
-  - name: Turkmen
-    level: Native
-  - name: English
-    level: Native
-  - name: Arabic
-    level: Fluent
-  - name: Azerbaijani
-    level: Upper-intermediate
-  - name: Chinese
-    level: Beginner (HSK2 pathway)
+  - { name: Turkmen, level: Native }
+  - { name: English, level: Native }
+  - { name: Arabic, level: Fluent }
+  - { name: Azerbaijani, level: Upper-intermediate }
+  - { name: Chinese, level: Beginner (HSK2) }
 
-skill_groups:
-  - name: ML, DL & experimentation
-    items:
-      - Python
-      - Jupyter Notebook
-      - scikit-learn
-      - TensorFlow
-      - MLflow
-      - Git / GitHub
-  - name: Data analysis & SQL
-    items:
-      - Pandas
-      - NumPy
-      - matplotlib
-      - SQL
-      - Tableau
-      - Data preprocessing
 activities:
-  - title: University Demo Day (SABAH.HUB)
-    detail: Presented our startup as Co-Founder & CTO at university demo day.
   - title: Cursor Hackathon Baku
-    detail: Led team workflow and final presentation for a one-day prompt-risk guardrail prototype sprint.
+    detail: Led a team that built a prompt-risk guardrail prototype in one day, then pitched it and delivered the final demo.
+  - title: University Demo Day (SABAH.HUB × Baku ID) · 1st place
+    detail: Won first place with QuickRecap as Co-Founder & CTO.
+  - title: University Demo Day (SABAH.HUB × Baku ID)
+    detail: Presented DetalTap as Co-Founder & CTO.
   - title: Exploring AI – Training Series
-    detail: Azerconnect Group · multi-day fundamentals, ethics, and applied AI talks; completed with certificate.
+    detail: Azerconnect Group · completed with certificate.
   - title: Chinese Language Proficiency (HSK2)
-    detail: Formal assessment milestone alongside beginner conversational practice.
-  - title: Beijing City Walk – Cloud Hutong Tour
-    detail: Short cultural immersion program (completion certificate).
-  - title: ADA International Festival (12th edition)
-    detail: Represented Iraq and India embassy booths at ADA International Festival.
+    detail: Formal assessment milestone.

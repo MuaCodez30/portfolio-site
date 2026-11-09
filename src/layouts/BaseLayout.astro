@@ -1,11 +1,28 @@
 ---
+import "@fontsource-variable/geist";
+import "@fontsource-variable/geist-mono";
 import "../styles/global.css";
 
 interface Props {
   title: string;
-  description?: string;
+  description: string;
+  person: { name: string; jobTitle: string; email: string; sameAs: string[]; image: string };
 }
-const { title, description = "Portfolio — Muaataz Ismaeel" } = Astro.props;
+const { title, description, person } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/?$/, "/");
+const canonical = new URL(base, Astro.site).href;
+const ogImage = new URL(`${base}og.png`, Astro.site).href;
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: person.name,
+  jobTitle: person.jobTitle,
+  url: canonical,
+  image: new URL(`${base}${person.image}`, Astro.site).href,
+  email: `mailto:${person.email}`,
+  sameAs: person.sameAs,
+  address: { "@type": "PostalAddress", addressLocality: "Baku", addressCountry: "AZ" },
+};
 ---
 
 <!doctype html>
@@ -13,17 +30,78 @@ const { title, description = "Portfolio — Muaataz Ismaeel" } = Astro.props;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content={description} />
-    <link rel="icon" href="data:," />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap"
-      rel="stylesheet"
-    />
     <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#fbfbfa" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0a0c0d" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" href={`${base}favicon.svg`} type="image/svg+xml" />
+    <link rel="apple-touch-icon" href={`${base}apple-touch-icon.png`} />
+
+    <meta property="og:type" content="profile" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+    <script is:inline>
+      (function () {
+        var t = null;
+        try { t = localStorage.getItem("theme"); } catch (e) {}
+        var dark = t ? t === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
+        document.documentElement.dataset.theme = dark ? "dark" : "light";
+      })();
+    </script>
   </head>
   <body>
     <slot />
+    <script>
+      // Theme toggle
+      const root = document.documentElement;
+      document.querySelectorAll<HTMLButtonElement>("[data-theme-toggle]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const next = root.dataset.theme === "dark" ? "light" : "dark";
+          root.dataset.theme = next;
+          try { localStorage.setItem("theme", next); } catch (e) {}
+        });
+      });
+
+      // Highlight the nav link for the section in view
+      const links = new Map<string, HTMLAnchorElement>();
+      document.querySelectorAll<HTMLAnchorElement>("[data-nav] a").forEach((a) => links.set(a.hash.slice(1), a));
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (!e.isIntersecting) return;
+            links.forEach((a) => a.removeAttribute("aria-current"));
+            links.get(e.target.id)?.setAttribute("aria-current", "true");
+          });
+        },
+        { rootMargin: "-40% 0px -55% 0px" },
+      );
+      links.forEach((_, id) => {
+        const el = document.getElementById(id);
+        if (el) observer.observe(el);
+      });
+
+      // Soft cursor spotlight (desktop, motion allowed)
+      if (window.matchMedia("(hover: hover) and (prefers-reduced-motion: no-preference)").matches) {
+        window.addEventListener(
+          "pointermove",
+          (e) => {
+            root.style.setProperty("--x", `${e.clientX}px`);
+            root.style.setProperty("--y", `${e.clientY}px`);
+          },
+          { passive: true },
+        );
+      }
+    </script>
   </body>
 </html>

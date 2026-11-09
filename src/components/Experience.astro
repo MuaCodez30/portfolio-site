@@ -1,48 +1,50 @@
 ---
-import type { SiteData } from "../types/site";
-import Section from "./Section.astro";
-import { formatExperienceRange } from "../data/loadSite";
+import type { Experience } from "../types/site";
+import Icon from "./Icon.astro";
 
 interface Props {
-  data: SiteData;
+  items: Experience[];
 }
-const { data } = Astro.props;
+const { items } = Astro.props;
 ---
 
-<Section
-  id="experience"
-  title="Experience"
->
-  <div class="grid-2">
-    {
-      data.experience.map((job) => (
-        <article class="card experience-card">
-          <h3>
-            {job.title} — {job.company}
+<ol class="timeline">
+  {
+    items.map((job) => (
+      <li class="job reveal">
+        <p class="job-date">
+          {job.start} – {job.end}
+        </p>
+        <div class="job-body">
+          <h3 class="job-title">
+            {job.title} <span class="at">·</span> <span class="company">{job.company}</span>
           </h3>
-          <p class="card-meta">
-            {job.location} · {formatExperienceRange(job.start, job.end)}
+          <p class="job-meta">
+            {job.location}
+            {job.metric && <span class="chip chip-accent">{job.metric}</span>}
+            {job.url && (
+              <a class="inline-link" href={job.url}>
+                {job.url_label ?? "Link"} <Icon name="arrow" size={14} />
+              </a>
+            )}
           </p>
-          {job.summary && <p class="experience-summary">{job.summary}</p>}
-          {job.stack && job.stack.length > 0 && (
-            <div class="chips" style="margin-bottom: 0.75rem;">
-              {job.stack.map((s) => (
-                <span class="chip chip-sm">{s}</span>
-              ))}
-            </div>
+          <ul class="bullets">
+            {job.bullets.map((b) => (
+              <li>{b}</li>
+            ))}
+          </ul>
+          <ul class="tags" aria-label="Tools">
+            {job.tags.map((t) => (
+              <li>{t}</li>
+            ))}
+          </ul>
+          {job.note && (
+            <p class="fine">
+              <Icon name="lock" size={13} /> {job.note}
+            </p>
           )}
-          {job.bullets.length > 0 && (
-            <details class="project-details">
-              <summary class="project-details-summary">Details</summary>
-              <ul class="project-bullet-list">
-                {job.bullets.map((b) => (
-                  <li>{b}</li>
-                ))}
-              </ul>
-            </details>
-          )}
-        </article>
-      ))
-    }
-  </div>
-</Section>
+        </div>
+      </li>
+    ))
+  }
+</ol>

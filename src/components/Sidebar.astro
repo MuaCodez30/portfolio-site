@@ -1,0 +1,60 @@
+---
+import type { SiteData } from "../types/site";
+import Icon from "./Icon.astro";
+
+interface Props {
+  data: SiteData;
+  nav: { id: string; label: string }[];
+}
+const { data, nav } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/?$/, "/");
+---
+
+<header class="side">
+  <div class="side-top">
+    <img
+      class="avatar intro"
+      style="--i:0"
+      src={`${base}profile.png`}
+      alt={`Portrait of ${data.name}`}
+      width="200"
+      height="200"
+      fetchpriority="high"
+    />
+    <h1 class="name intro" style="--i:1">{data.name}</h1>
+    <p class="role intro" style="--i:2">{data.role}</p>
+    <p class="lede intro" style="--i:3">{data.lede}</p>
+    <p class="status intro" style="--i:4">
+      <span class="dot" aria-hidden="true"></span>{data.status} · {data.location}
+    </p>
+
+    <nav class="side-nav" aria-label="Sections" data-nav>
+      <ul>
+        {
+          nav.map((n) => (
+            <li>
+              <a href={`#${n.id}`}>
+                <span class="nav-line" aria-hidden="true" />
+                {n.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+
+  <div class="side-actions intro" style="--i:5">
+    <a class="btn btn-primary" href={`${base}resume.pdf`} download="Muaataz-Ismaeel-CV.pdf">
+      <Icon name="download" size={17} /> Download CV
+    </a>
+    <div class="icon-row">
+      <a class="icon-btn" href={`mailto:${data.contact.email}`} aria-label="Email"><Icon name="mail" /></a>
+      <a class="icon-btn" href={data.contact.github} aria-label="GitHub" rel="me"><Icon name="github" /></a>
+      <a class="icon-btn" href={data.contact.linkedin} aria-label="LinkedIn" rel="me"><Icon name="linkedin" /></a>
+      <button class="icon-btn theme-btn" type="button" data-theme-toggle aria-label="Toggle dark mode">
+        <span class="i-sun"><Icon name="sun" /></span><span class="i-moon"><Icon name="moon" /></span>
+      </button>
+    </div>
+  </div>
+</header>

@@ -1,33 +1,20 @@
-# Portfolio site (Astro)
+# Muaataz Ismaeel — Portfolio
 
-Static, Vercel-ready portfolio. **Content** lives in [`resume.yaml`](resume.yaml) in this folder (so Vercel uploads it with the app).
+Personal site built with [Astro](https://astro.build), deployed to GitHub Pages:
+https://muacodez30.github.io/portfolio-site/
 
-`resume.yaml` is portfolio-first: `hero.intro`, structured `skill_groups` and `languages`, `projects[].kind` (`featured` | `course` | `side` | `archive`) with optional `context`, `lede`, `stack`, and `links`. Legacy `technical_skills_line`, string `languages`, string-list `activities`, and `archive_projects` are still merged at build time if you use them.
+## Edit content
 
-## Commands
+All text lives in [`resume.yaml`](resume.yaml). Keep it in sync with the CV at `public/resume.pdf`.
+
+## Run locally
 
 ```bash
 npm install
-npm run dev
-npm run build
-npm run preview
+npm run dev      # http://localhost:4321/portfolio-site/
+npm run build    # static output in dist/
 ```
 
-- Dev server: [http://localhost:4321](http://localhost:4321) (default Astro port).
-- Production output: `dist/`.
+## Deploy
 
-## Vercel
-
-1. Create a new project and point it at this Git repository (or upload the folder).
-2. Set **Root Directory** to `portfolio/site`.
-3. Framework preset: **Astro** (or “Other” with build `npm run build`, output `dist`).
-4. After your first deploy, update `astro.config.mjs` → `site` to your real URL (for canonical links if you add them later).
-
-## Assets
-
-- **Avatar:** replace [`public/avatar-placeholder.svg`](public/avatar-placeholder.svg) with your photo (e.g. `public/profile.jpg`) and update [`src/components/Hero.astro`](src/components/Hero.astro) to use it.
-- **Resume PDF:** [`public/resume.pdf`](public/resume.pdf) — copy your latest export here (or re-copy from the workspace root `Muaataz Ismaeel 2026 Resume - ML.pdf`).
-
-## Note on folder names with `*`
-
-If this repo lives under a path that contains a literal asterisk, **Astro 5** and **`extends`: `astro/tsconfigs/strict`** can break Node/Vite resolution. This project pins **Astro 4** and uses an **inlined `tsconfig.json`** to stay compatible. If you rename the parent folder to remove `*`, you can try upgrading Astro again.
+Pushing to `main` runs `.github/workflows/deploy.yml`, which builds the site and publishes it to GitHub Pages.

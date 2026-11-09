@@ -1,69 +1,55 @@
 ---
-import type { ProjectEntry } from "../types/site";
+import type { Project } from "../types/site";
+import Icon from "./Icon.astro";
 
 interface Props {
-  project: ProjectEntry;
-  compact?: boolean;
+  project: Project;
+  featured?: boolean;
 }
-const { project, compact = false } = Astro.props;
-const { links } = project;
-const detailsLabel =
-  project.kind === "course"
-    ? "See how it maps to the course brief"
-    : "See outcomes and details";
+const { project: p, featured = false } = Astro.props;
 ---
 
-<article class="card project-card" tabindex="0">
-  <h3>{project.name}</h3>
-  {!compact && <p class="card-meta">{project.date}</p>}
-  {!compact && project.context && <p class="project-context">{project.context}</p>}
-  {project.lede && <p class="project-lede">{project.lede}</p>}
+<article class:list={["card", "reveal", { "card-featured": featured }]}>
+  <div class="card-head">
+    {p.metric && <span class="chip chip-accent">{p.metric}</span>}
+    <span class="card-date">{p.date}</span>
+  </div>
+  <h3 class="card-title">{p.name}</h3>
+  {p.context && <p class="card-context">{p.context}</p>}
+  <p class="card-lede">{p.lede}</p>
   {
-    !compact && project.stack && project.stack.length > 0 && (
-      <div class="chips project-stack">
-        {project.stack.map((s) => (
-          <span class="chip chip-sm">{s}</span>
+    p.bullets && (
+      <ul class="bullets">
+        {p.bullets.map((b) => (
+          <li>{b}</li>
         ))}
-      </div>
+      </ul>
     )
   }
+  <ul class="tags" aria-label="Tools">
+    {p.tags.map((t) => (
+      <li>{t}</li>
+    ))}
+  </ul>
   {
-    !compact && links && (links.repo || links.demo || links.writeup) && (
-      <p class="project-links">
-        {links.repo && (
-          <a href={links.repo} target="_blank" rel="noopener noreferrer">
-            Code
+    (p.repo || p.demo || p.note) && (
+      <p class="card-links">
+        {p.repo && (
+          <a class="inline-link" href={p.repo}>
+            <Icon name="github" size={14} /> Code <Icon name="arrow" size={13} />
           </a>
         )}
-        {links.demo && (
-          <>
-            {links.repo && <span class="link-sep">·</span>}
-            <a href={links.demo} target="_blank" rel="noopener noreferrer">
-              Demo
-            </a>
-          </>
+        {p.demo && (
+          <a class="inline-link" href={p.demo}>
+            Demo <Icon name="arrow" size={13} />
+          </a>
         )}
-        {links.writeup && (
-          <>
-            {(links.repo || links.demo) && <span class="link-sep">·</span>}
-            <a href={links.writeup} target="_blank" rel="noopener noreferrer">
-              Notes
-            </a>
-          </>
+        {p.note && (
+          <span class="fine">
+            <Icon name="lock" size={13} /> {p.note}
+          </span>
         )}
       </p>
-    )
-  }
-  {
-    project.bullets.length > 0 && (
-      <details class="project-details">
-        <summary class="project-details-summary">{compact ? "Details" : detailsLabel}</summary>
-        <ul class="project-bullet-list">
-          {project.bullets.map((b) => (
-            <li>{b}</li>
-          ))}
-        </ul>
-      </details>
     )
   }
 </article>
