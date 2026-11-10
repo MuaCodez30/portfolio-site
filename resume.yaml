@@ -15,7 +15,7 @@ contact:
 
 about:
   - Computer Science student at ADA University, finishing my final course in December 2026, and AI engineering intern at HAL-X in Baku.
-  - I like building things end to end, from the data to a working tool. I use AI coding tools like Claude Code and Cursor to move fast, and then I check that the result actually works, with tests, held-out evaluation and independent re-checks.
+  - I like building things end to end, from the data to a working tool. I use AI coding tools like Claude Code, Codex and Cursor to move fast, and then I check that the result actually works, with tests, held-out evaluation and independent re-checks.
   - I'm looking for AI engineering roles where I can build useful tools and ship them.
 
 experience:
@@ -45,8 +45,10 @@ experience:
       - Building an AI podcast-summary product. Users share a Spotify or podcast link, choose a time range, and get a summary of the part they missed.
       - Live on the App Store as a native iOS app (SwiftUI) with a companion website, with 150+ downloads. An Android version is releasing soon.
       - Won 1st place at University Demo Day, hosted by SABAH.HUB and Baku ID.
-      - Summaries are generated with LLMs (Gemini and Grok). I set the product roadmap and UX direction.
-    tags: [SwiftUI, iOS, Gemini, Grok]
+      - Built the recap pipeline. It uses the publisher's transcript when there is one, otherwise transcribes the audio on the server (Whisper via Groq, and Deepgram). Gemini then writes the recap and answers follow-up questions, switching to another Gemini model when one is unavailable. API keys stay on the server.
+      - Shipped version 4.0 in October 2026. Every key point and quote shows the time it was said, so users can check it. A recap of the first 10 minutes arrives in about 19 seconds, and follow-up answers in about 3.
+      - I set the product roadmap and UX direction.
+    tags: [SwiftUI, iOS, Gemini, Whisper, Deepgram]
 
   - company: Kelly Tutors
     title: AI Education Research & Market Analyst Intern
@@ -93,6 +95,7 @@ featured:
       - Extracts ResNet50 frame embeddings and uses temporal differencing to capture inconsistencies over time.
       - Trains and compares classical ML classifiers on the video-level features, with hyperparameter tuning, class-imbalance handling and error analysis.
       - Led the team under two faculty supervisors. The work became a paper accepted and presented at NLPAI 2026.
+      - Worked hands-on on the text detection part first, then on the video detection part when the project moved to video.
     tags: [Python, ResNet50, scikit-learn, pandas, NumPy]
     repo: "https://github.com/MuaCodez30/csci-4701-deepfake-detection"
 
@@ -174,7 +177,7 @@ skills:
   - group: ML & NLP
     items: [Python, scikit-learn, TensorFlow, XGBoost, MLflow, Hugging Face Transformers]
   - group: LLMs & AI tools
-    items: [OpenAI API, Gemini API, Grok API, Claude Code, Cursor]
+    items: [OpenAI API, Gemini API, Groq API, Claude Code, Codex, Cursor]
   - group: Data
     items: [pandas, NumPy, SQL, Matplotlib, Tableau, Jupyter]
   - group: Engineering
