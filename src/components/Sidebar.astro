@@ -52,6 +52,9 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, "/");
       <a class="icon-btn" href={`mailto:${data.contact.email}`} aria-label="Email"><Icon name="mail" /></a>
       <a class="icon-btn" href={data.contact.github} aria-label="GitHub" rel="me"><Icon name="github" /></a>
       <a class="icon-btn" href={data.contact.linkedin} aria-label="LinkedIn" rel="me"><Icon name="linkedin" /></a>
+      <button class="icon-btn motion-btn" type="button" data-motion-toggle aria-pressed="true" aria-label="Background animation" title="Background animation" hidden>
+        <span class="i-pause"><Icon name="pause" /></span><span class="i-play"><Icon name="play" /></span>
+      </button>
       <button class="icon-btn theme-btn" type="button" data-theme-toggle aria-label="Toggle dark mode">
         <span class="i-sun"><Icon name="sun" /></span><span class="i-moon"><Icon name="moon" /></span>
       </button>
