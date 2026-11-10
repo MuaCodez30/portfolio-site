@@ -19,7 +19,12 @@
 
   --radius: 14px;
   --radius-sm: 9px;
+  /* Shared motion: every interaction uses these, so details feel related */
   --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-fast: 160ms;
+  --dur: 240ms;
+  --dur-slow: 560ms;
   color-scheme: light;
 }
 
@@ -156,6 +161,21 @@ ol {
   mask-image: linear-gradient(to bottom, #000 0%, #000 55%, transparent 100%);
 }
 
+/* Ambient network (desktop, JS). The canvas draws its own pointer light, so
+   the static CSS glow is dropped while it runs; the dot grid stays beneath. */
+.field {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.has-field .backdrop {
+  background: radial-gradient(var(--dot) 1px, transparent 1px) 0 0 / 22px 22px;
+}
+
 /* ---------- Layout ---------- */
 .shell {
   max-width: 1200px;
@@ -282,11 +302,25 @@ ol {
 }
 
 .nav-line {
+  position: relative;
   display: block;
   width: 2rem;
   height: 1px;
+  overflow: hidden;
   background: currentColor;
-  transition: width 0.25s var(--ease), background-color 0.2s;
+  transition: width var(--dur) var(--ease), background-color var(--dur-fast);
+}
+
+/* Reading progress through the active section */
+.nav-line::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--accent);
+  transform: scaleX(var(--p, 0));
+  transform-origin: left;
+  opacity: 0;
+  transition: opacity var(--dur-fast);
 }
 
 .side-nav a:hover,
@@ -298,6 +332,18 @@ ol {
 .side-nav a[aria-current] .nav-line {
   width: 4rem;
   background: var(--accent);
+}
+
+.side-nav a[aria-current] .nav-line {
+  background: color-mix(in srgb, var(--accent) 30%, var(--border));
+}
+
+.side-nav a[aria-current] .nav-line::after {
+  opacity: 1;
+}
+
+.side-nav a[aria-current]:hover .nav-line {
+  background: color-mix(in srgb, var(--accent) 45%, var(--border));
 }
 
 .side-actions {
@@ -325,7 +371,7 @@ ol {
   background: var(--surface);
   font-size: 0.92rem;
   font-weight: 550;
-  transition: transform 0.18s var(--ease), border-color 0.18s, background-color 0.18s;
+  transition: transform var(--dur-fast) var(--ease), border-color var(--dur-fast), background-color var(--dur-fast);
 }
 
 .btn:hover {
@@ -359,13 +405,39 @@ ol {
   background: var(--surface);
   color: var(--muted);
   cursor: pointer;
-  transition: color 0.18s, border-color 0.18s, transform 0.18s var(--ease);
+  transition: color var(--dur-fast), border-color var(--dur-fast), transform var(--dur-fast) var(--ease);
 }
 
 .icon-btn:hover {
   color: var(--accent);
   border-color: var(--accent);
   transform: translateY(-1px);
+}
+
+.btn:active,
+.icon-btn:active {
+  transform: translateY(0) scale(0.97);
+}
+
+.icon-btn[hidden] {
+  display: none;
+}
+
+.icon-btn svg {
+  transition: transform var(--dur) var(--ease-out);
+}
+
+.theme-btn:active svg {
+  transform: rotate(-30deg) scale(0.9);
+}
+
+.motion-btn[aria-pressed="true"] .i-play,
+.motion-btn[aria-pressed="false"] .i-pause {
+  display: none;
+}
+
+.motion-btn[aria-pressed="false"] {
+  color: var(--faint);
 }
 
 .theme-btn .i-sun { display: none; }
@@ -542,11 +614,11 @@ main {
   font-weight: 550;
   color: var(--text);
   border-bottom: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
-  transition: color 0.18s, border-color 0.18s;
+  transition: color var(--dur-fast), border-color var(--dur-fast);
 }
 
 .inline-link svg:last-child {
-  transition: transform 0.18s var(--ease);
+  transition: transform var(--dur-fast) var(--ease);
 }
 
 .inline-link:hover {
@@ -587,6 +659,13 @@ main {
   .job {
     grid-template-columns: 8.5rem 1fr;
     gap: 1.5rem;
+    padding: 1.25rem 1rem;
+    margin: 0 -1rem; /* matches the 1rem page padding: no horizontal overflow */
+  }
+}
+
+@media (min-width: 1024px) {
+  .job {
     padding: 1.25rem;
     margin: 0 -1.25rem;
   }
@@ -689,7 +768,17 @@ main {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   background: var(--surface);
-  transition: transform 0.2s var(--ease), border-color 0.2s, box-shadow 0.2s, opacity 0.2s;
+  isolation: isolate;
+  transition:
+    transform var(--dur) var(--ease),
+    border-color var(--dur),
+    box-shadow var(--dur),
+    opacity var(--dur);
+}
+
+.card:focus-within {
+  border-color: color-mix(in srgb, var(--accent) 55%, var(--border));
+  box-shadow: 0 0 0 3px var(--accent-soft);
 }
 
 .card-featured {
@@ -705,8 +794,48 @@ main {
     border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
     box-shadow: 0 12px 30px -18px color-mix(in srgb, var(--accent) 50%, transparent);
   }
-  .grid:has(.card:hover) .card:not(:hover) {
+  .grid:has(.card:hover) .card:not(:hover, :focus-within) {
     opacity: 0.65;
+  }
+}
+
+/* Pointer light: a soft glow inside the card and a brighter edge that follow
+   the mouse. Decorative only; text selection and links are untouched. */
+@media (hover: hover) and (pointer: fine) {
+  .card::before,
+  .card::after {
+    content: "";
+    position: absolute;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity var(--dur) var(--ease);
+  }
+  .card::before {
+    inset: 0;
+    z-index: -1;
+    background: radial-gradient(
+      380px circle at var(--mx, 50%) var(--my, 0%),
+      color-mix(in srgb, var(--accent) 7%, transparent),
+      transparent 65%
+    );
+  }
+  .card::after {
+    inset: -1px;
+    padding: 1px;
+    background: radial-gradient(
+      220px circle at var(--mx, 50%) var(--my, 0%),
+      color-mix(in srgb, var(--accent) 75%, transparent),
+      transparent 70%
+    );
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask-composite: exclude;
+  }
+  .card:hover::before,
+  .card:hover::after {
+    opacity: 1;
   }
 }
 
@@ -878,13 +1007,13 @@ main {
     animation-delay: calc(var(--i, 0) * 70ms);
   }
 
-  /* Scroll reveal where supported; content stays visible elsewhere */
-  @supports (animation-timeline: view()) {
-    .reveal {
-      animation: rise linear both;
-      animation-timeline: view();
-      animation-range: entry 0% entry 30%;
-    }
+  /* One-time reveal, driven by ui.ts. Without JS (or with reduced motion)
+     the js-reveal class is never set, so everything stays visible. */
+  .js-reveal .reveal:not(.is-in) {
+    opacity: 0;
+  }
+  .js-reveal .reveal.is-in:not(.seen) {
+    animation: rise var(--dur-slow) var(--ease-out) backwards;
   }
 }
 
@@ -902,5 +1031,17 @@ main {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+/* ---------- Print: never hide content behind motion ---------- */
+@media print {
+  .field,
+  .backdrop {
+    display: none;
+  }
+  .js-reveal .reveal {
+    opacity: 1 !important;
+    animation: none !important;
   }
 }

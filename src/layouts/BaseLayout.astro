@@ -72,36 +72,10 @@ const jsonLd = {
           try { localStorage.setItem("theme", next); } catch (e) {}
         });
       });
-
-      // Highlight the nav link for the section in view
-      const links = new Map<string, HTMLAnchorElement>();
-      document.querySelectorAll<HTMLAnchorElement>("[data-nav] a").forEach((a) => links.set(a.hash.slice(1), a));
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((e) => {
-            if (!e.isIntersecting) return;
-            links.forEach((a) => a.removeAttribute("aria-current"));
-            links.get(e.target.id)?.setAttribute("aria-current", "true");
-          });
-        },
-        { rootMargin: "-40% 0px -55% 0px" },
-      );
-      links.forEach((_, id) => {
-        const el = document.getElementById(id);
-        if (el) observer.observe(el);
-      });
-
-      // Soft cursor spotlight (desktop, motion allowed)
-      if (window.matchMedia("(hover: hover) and (prefers-reduced-motion: no-preference)").matches) {
-        window.addEventListener(
-          "pointermove",
-          (e) => {
-            root.style.setProperty("--x", `${e.clientX}px`);
-            root.style.setProperty("--y", `${e.clientY}px`);
-          },
-          { passive: true },
-        );
-      }
+    </script>
+    <script>
+      // Nav progress, reveals, card light and the ambient background field
+      import "../scripts/ui";
     </script>
   </body>
 </html>
