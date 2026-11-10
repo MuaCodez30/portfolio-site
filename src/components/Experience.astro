@@ -27,6 +27,11 @@ const { items } = Astro.props;
                 {job.url_label ?? "Link"} <Icon name="arrow" size={14} />
               </a>
             )}
+            {job.website && (
+              <a class="inline-link" href={job.website}>
+                Website <Icon name="arrow" size={14} />
+              </a>
+            )}
           </p>
           <ul class="bullets">
             {job.bullets.map((b) => (

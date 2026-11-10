@@ -6,6 +6,7 @@ export type Experience = {
   end: string;
   url?: string;
   url_label?: string;
+  website?: string;
   metric?: string;
   note?: string;
   bullets: string[];

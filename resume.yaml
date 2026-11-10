@@ -40,15 +40,16 @@ experience:
     end: Present
     url: "https://apps.apple.com/us/app/quickrecap/id6765835695"
     url_label: App Store
+    website: "https://quickrecap.site"
     metric: 1st place · University Demo Day
     bullets:
-      - Building an AI podcast-summary product. Users share a Spotify or podcast link, choose a time range, and get a summary of the part they missed.
-      - Live on the App Store as a native iOS app (SwiftUI) with a companion website, with 150+ downloads. An Android version is releasing soon.
-      - Won 1st place at University Demo Day, hosted by SABAH.HUB and Baku ID.
-      - Built the recap pipeline. It uses the publisher's transcript when there is one, otherwise transcribes the audio on the server (Whisper via Groq, and Deepgram). Gemini then writes the recap and answers follow-up questions, switching to another Gemini model when one is unavailable. API keys stay on the server.
-      - Shipped version 4.0 in October 2026. Every key point and quote shows the time it was said, so users can check it. A recap of the first 10 minutes arrives in about 19 seconds, and follow-up answers in about 3.
-      - I set the product roadmap and UX direction.
-    tags: [SwiftUI, iOS, Gemini, Whisper, Deepgram]
+      - Building an AI podcast-summary product. Users share a Spotify or podcast link, choose a time range, and get a summary of the part they missed. Won 1st place at University Demo Day, hosted by SABAH.HUB and Baku ID.
+      - Live on the App Store as a native iOS app (Swift, SwiftUI) with a companion website, with 150+ downloads. An Android version in Kotlin is being prepared for a closed beta.
+      - I designed the architecture and set the roadmap and UX direction, and built it with AI-assisted development (Claude Code). The iOS app talks to a serverless backend on Supabase (Postgres and TypeScript edge functions), so API keys never leave the server.
+      - Built the recap pipeline. It uses the publisher's transcript when there is one, otherwise transcribes the audio on the server (Whisper via Groq, or Deepgram). Gemini writes the recap and answers follow-up questions. Long episodes, up to about 8 hours, are summarized in parts and then combined (map-reduce).
+      - Made the AI steps dependable. The backend switches to another Gemini model when one is unavailable, falls back when a streamed answer stalls, and clearly labels a recap as partial when it is. Every key point and quote shows the time it was said, so users can check it.
+      - Shipped version 4.0 in October 2026 and handled the App Store submission. Added StoreKit 2 subscriptions with server-side receipt checks. Testing covers end-to-end UI tests (Maestro), StoreKit tests and 144 server tests, and release testing found and fixed about 8 release-blocking bugs. A recap of the first 10 minutes arrives in about 19 seconds, and follow-up answers in about 3.
+    tags: [Swift, SwiftUI, Supabase, TypeScript, Gemini, Whisper, Deepgram, StoreKit 2]
 
   - company: Kelly Tutors
     title: AI Education Research & Market Analyst Intern
@@ -75,7 +76,7 @@ experience:
       - Led technical direction for a car-parts marketplace. Started with a Telegram bot prototype for part requests.
       - Then built a fully functional marketplace website with search, listings and seller onboarding. It was launch-ready but never launched publicly.
       - Presented DetalTap at University Demo Day (SABAH.HUB × Baku ID).
-    tags: [Telegram bot, Marketplace web app, Product]
+    tags: [Telegram bot, Marketplace web app, Cursor, Product]
 
 publications:
   - title: Multimodal Fake-Information Detection for Low-Resource Language in Case of Azerbaijani Language
@@ -181,7 +182,7 @@ skills:
   - group: Data
     items: [pandas, NumPy, SQL, Matplotlib, Tableau, Jupyter]
   - group: Engineering
-    items: [Git / GitHub, JavaScript, TypeScript, SwiftUI, Java, WebGL / GLSL]
+    items: [Git / GitHub, JavaScript, TypeScript, SwiftUI, Supabase, Java, WebGL / GLSL]
 
 languages:
   - { name: Turkmen, level: Native }
