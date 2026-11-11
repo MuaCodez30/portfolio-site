@@ -2,8 +2,8 @@
 # Keep it in sync with the CV PDF in public/resume.pdf.
 
 name: Muaataz Ismaeel
-role: AI Engineer · LLM apps & NLP
-lede: I build LLM apps and NLP pipelines with Claude Code, Codex and Cursor, and I test what the AI writes before it ships.
+role: AI Engineer · LLMs, apps & NLP
+lede: I build LLM tools, apps and NLP pipelines with Claude Code, Codex and Cursor, and I test what the AI writes before it ships.
 status: Open to AI engineering internships
 location: Baku, Azerbaijan
 updated: November 2026
@@ -115,47 +115,55 @@ featured:
 
 projects:
   - name: Prompt-risk guardrail (Cursor Hackathon Baku)
+    area: AI & NLP
     metric: Built in one day
     lede: Led a team that built a prompt-risk guardrail prototype in one day at Cursor Hackathon Baku, then pitched it and delivered the final demo.
     tags: [Hackathon, Prompt security, Team lead]
 
   - name: Azerbaijani news classification
+    area: AI & NLP
     date: Apr 2025
     metric: 83.2% test accuracy
     lede: Six-way news topic classifier for Azerbaijani text using TF-IDF features. A linear SVM beat Naive Bayes (77.6%) and a decision tree (72.3%).
     tags: [scikit-learn, TF-IDF, Plotly]
 
   - name: Forest cover type at scale
+    area: ML & data
     date: Apr 2025
     metric: 95.1% val. accuracy
     lede: About 500k rows and 54 features. Compared classifiers, then soft voting with weak voters removed. A second experiment majority-voted 1,200 tiny trees.
     tags: [pandas, NumPy, scikit-learn]
 
   - name: Logistic regression from scratch
+    area: ML & data
     date: Jun 2025
     metric: 89% vs 93% scikit-learn
     lede: Sigmoid, log loss and batch gradient descent written by hand, with a decision-boundary plot, then checked against scikit-learn on the same data.
     tags: [NumPy, matplotlib]
 
   - name: Turbo.az car price modeling
+    area: ML & data
     date: Feb 2025
     metric: 3 solvers compared
     lede: Car prices from messy real marketplace listings. Hand-written gradient descent, scikit-learn and the normal equation, cross-checked against each other.
     tags: [NumPy, pandas, matplotlib]
 
   - name: Cleaning robot (MDP + Q-learning)
+    area: ML & data
     date: May 2025
     metric: Planning vs RL
     lede: Grid robot with dirt, walls and movement slip. Solved with value and policy iteration, then compared against a tabular Q-learning agent.
     tags: [Python, NumPy, Jupyter]
 
   - name: Osmos 3D in WebGL
+    area: Engineering
     date: 2025
     metric: Playable demo
     lede: Team computer-graphics project. A browser 3D game with custom shaders, seeded world generation, collisions and camera controls.
     tags: [JavaScript, WebGL, GLSL]
 
   - name: International football analysis
+    area: ML & data
     date: Mar 2023
     metric: 145 years of matches
     lede: Notebook analysis of international results (1872–2017) covering team dominance, penalties, friendlies and top scorers.
@@ -163,6 +171,7 @@ projects:
     repo: "https://github.com/MuaCodez30/Football_Data_Analysis"
 
   - name: Book management system
+    area: Engineering
     date: May 2024
     metric: Led a team of 4
     lede: Java Swing desktop app with authentication, CRUD, sorting and filtering, built with shared Git history and code reviews.

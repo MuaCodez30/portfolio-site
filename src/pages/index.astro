@@ -16,6 +16,10 @@ const nav = [
   { id: "contact", label: "Contact" },
 ];
 const year = new Date().getFullYear();
+const areas = [...new Set(data.projects.map((p) => p.area).filter(Boolean))].map((name) => ({
+  name: name as string,
+  count: data.projects.filter((p) => p.area === name).length,
+}));
 ---
 
 <BaseLayout
@@ -72,13 +76,31 @@ const year = new Date().getFullYear();
         <div class="featured">
           {data.featured.map((p) => <ProjectCard project={p} featured />)}
         </div>
-        <details class="more-projects">
-          <summary class="btn">
-            <span class="more-open">Explore {data.projects.length} more projects</span>
-            <span class="more-close">Show fewer projects</span>
+        <details class="more-projects" data-deck>
+          <summary class="deck">
+            <span class="deck-stack" aria-hidden="true">
+              {data.projects.slice(0, 3).map((p, i) => (
+                <span class="deck-card" style={`--d:${i}`}>
+                  <span class="deck-card-title">{p.name}</span>
+                  {p.metric && <span class="deck-card-metric">{p.metric}</span>}
+                </span>
+              ))}
+            </span>
+            <span class="deck-label">
+              <span class="deck-icon" aria-hidden="true"><Icon name="stack" size={18} /></span>
+              <span class="more-open">Explore {data.projects.length} more projects</span>
+              <span class="more-close">Show fewer projects</span>
+              <span class="deck-areas">{areas.map((a) => a.name).join(" · ")}</span>
+            </span>
           </summary>
-          <div class="grid">
-            {data.projects.map((p) => <ProjectCard project={p} />)}
+          <div class="deck-filters" role="group" aria-label="Filter projects">
+            <button type="button" class="filter" data-filter="all" aria-pressed="true">All <span>{data.projects.length}</span></button>
+            {areas.map((a) => (
+              <button type="button" class="filter" data-filter={a.name} aria-pressed="false">{a.name} <span>{a.count}</span></button>
+            ))}
+          </div>
+          <div class="grid deck-grid">
+            {data.projects.map((p, i) => <ProjectCard project={p} index={i} reveal={false} />)}
           </div>
         </details>
       </Section>
@@ -122,18 +144,24 @@ const year = new Date().getFullYear();
 
       <footer class="footer reveal" id="contact" aria-labelledby="contact-title">
         <h2 class="sr-only" id="contact-title">Contact</h2>
-        <div class="footer-actions">
-          <a class="btn btn-primary btn-lg" href={`mailto:${data.contact.email}`}><Icon name="mail" size={18} /> Get in touch</a>
-          <a class="icon-btn" href={data.contact.github} aria-label="GitHub" rel="me"><Icon name="github" /></a>
-          <a class="icon-btn" href={data.contact.linkedin} aria-label="LinkedIn" rel="me"><Icon name="linkedin" /></a>
+        <div class="footer-main">
+          <div class="footer-cta">
+            <a class="btn btn-primary btn-lg" href={`mailto:${data.contact.email}`}><Icon name="mail" size={18} /> Get in touch</a>
+            <a class="copy-email" href={`mailto:${data.contact.email}`} data-copy={data.contact.email} aria-label={`Copy email address ${data.contact.email}`}>
+              <span class="copy-text">{data.contact.email}</span>
+              <span class="copy-icon" aria-hidden="true"><span class="i-copy"><Icon name="copy" size={15} /></span><span class="i-check"><Icon name="check" size={15} /></span></span>
+            </a>
+          </div>
+          <div class="footer-social">
+            <a class="icon-btn" href={data.contact.github} aria-label="GitHub" rel="me"><Icon name="github" /></a>
+            <a class="icon-btn" href={data.contact.linkedin} aria-label="LinkedIn" rel="me"><Icon name="linkedin" /></a>
+          </div>
         </div>
-        <p class="cta-email"><a href={`mailto:${data.contact.email}`}>{data.contact.email}</a></p>
-        <div class="footer-fine">
-          <p class="fine">© {year} {data.name}</p>
-          <button class="icon-btn motion-btn" type="button" data-motion-toggle aria-pressed="true" aria-label="Background animation" title="Background animation" hidden>
-            <span class="i-pause"><Icon name="pause" size={15} /></span><span class="i-play"><Icon name="play" size={15} /></span>
-          </button>
+        <div class="footer-bottom">
+          <span>© {year} {data.name}</span>
+          <a href="#top" class="to-top">Back to top <Icon name="arrow" size={13} /></a>
         </div>
+        <p class="sr-only" aria-live="polite" data-copy-status></p>
       </footer>
     </main>
   </div>

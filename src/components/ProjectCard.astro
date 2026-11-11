@@ -5,11 +5,13 @@ import Icon from "./Icon.astro";
 interface Props {
   project: Project;
   featured?: boolean;
+  index?: number;
+  reveal?: boolean;
 }
-const { project: p, featured = false } = Astro.props;
+const { project: p, featured = false, index = 0, reveal = true } = Astro.props;
 ---
 
-<article class:list={["card", "reveal", { "card-featured": featured }]}>
+<article class:list={["card", { reveal, "card-featured": featured }]} data-area={p.area} style={`--i:${index}`}>
   <div class="card-head">
     {p.metric && <span class="chip chip-accent">{p.metric}</span>}
     <span class="card-date">{p.date}</span>

@@ -1,4 +1,4 @@
-import { initField, setPointer } from "./field";
+import { burst, initField, setPointer } from "./field";
 
 const root = document.documentElement;
 const finePointer = matchMedia("(hover: hover) and (pointer: fine)");
@@ -137,6 +137,75 @@ document.addEventListener("click", (e) => {
   const d = card.querySelector<HTMLDetailsElement>("details.more");
   if (d) d.open = !d.open;
 });
+
+/* ---------- "More projects" deck: deal the cards, filter by area ---------- */
+const deck = document.querySelector<HTMLDetailsElement>("[data-deck]");
+if (deck) {
+  const cards = [...deck.querySelectorAll<HTMLElement>(".deck-grid .card")];
+  const filters = [...deck.querySelectorAll<HTMLButtonElement>(".filter")];
+  const deal = () => {
+    let n = 0;
+    for (const c of cards) {
+      c.classList.remove("is-dealt");
+      if (c.hidden) continue;
+      c.style.setProperty("--n", String(n++));
+      void c.offsetWidth; // restart the animation
+      c.classList.add("is-dealt");
+    }
+  };
+  deck.addEventListener("toggle", () => {
+    if (deck.open) deal();
+  });
+  for (const f of filters) {
+    f.addEventListener("click", () => {
+      const area = f.dataset.filter;
+      for (const b of filters) b.setAttribute("aria-pressed", String(b === f));
+      for (const c of cards) c.hidden = area !== "all" && c.dataset.area !== area;
+      deal();
+    });
+  }
+}
+
+/* ---------- Copy email in one click ---------- */
+const status = document.querySelector<HTMLElement>("[data-copy-status]");
+document.querySelectorAll<HTMLAnchorElement>("[data-copy]").forEach((el) => {
+  let timer = 0;
+  el.addEventListener("click", async (e) => {
+    if (!navigator.clipboard) return; // no clipboard API: the mail link still works
+    e.preventDefault();
+    try {
+      await navigator.clipboard.writeText(el.dataset.copy ?? "");
+    } catch {
+      location.href = el.href;
+      return;
+    }
+    el.classList.add("is-copied");
+    const text = el.querySelector(".copy-text");
+    const original = el.dataset.copy ?? "";
+    if (text) text.textContent = "Copied to clipboard";
+    if (status) status.textContent = "Email address copied";
+    clearTimeout(timer);
+    timer = window.setTimeout(() => {
+      el.classList.remove("is-copied");
+      if (text) text.textContent = original;
+      if (status) status.textContent = "";
+    }, 1800);
+  });
+});
+
+/* ---------- Hidden details ---------- */
+// Click the photo: a ripple runs through the background network
+document.querySelector<HTMLElement>("[data-avatar]")?.addEventListener("click", (e) => {
+  const r = (e.currentTarget as HTMLElement).getBoundingClientRect();
+  burst(r.left + r.width / 2, r.top + r.height / 2);
+});
+
+// A hello for engineers who open DevTools
+console.log(
+  "%cHi there 👋%c\nYou opened DevTools, so you're my kind of person.\nThis site is Astro with about 3 KB of hand-written JS, no frameworks.\nSource: https://github.com/MuaCodez30/portfolio-site\nSay hi: muaataz56@gmail.com",
+  "font: 600 16px system-ui; color: #0d7a6f",
+  "font: 13px system-ui; line-height: 1.6",
+);
 
 initReveal();
 initField();

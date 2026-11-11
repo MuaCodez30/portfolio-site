@@ -25,6 +25,7 @@ export type Publication = {
 
 export type Project = {
   name: string;
+  area?: string;
   date?: string;
   context?: string;
   metric?: string;

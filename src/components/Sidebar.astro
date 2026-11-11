@@ -12,15 +12,15 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, "/");
 
 <header class="side">
   <div class="side-top">
-    <img
-      class="avatar intro"
-      style="--i:0"
-      src={`${base}profile.png`}
-      alt={`Portrait of ${data.name}`}
-      width="200"
-      height="200"
-      fetchpriority="high"
-    />
+    <span class="avatar intro" style="--i:0" data-avatar>
+      <img
+        src={`${base}profile.png`}
+        alt={`Portrait of ${data.name}`}
+        width="200"
+        height="200"
+        fetchpriority="high"
+      />
+    </span>
     <h1 class="name intro" style="--i:1">{data.name}</h1>
     <p class="role intro" style="--i:2">{data.role}</p>
     <p class="lede intro" style="--i:3">{data.lede}</p>
@@ -43,7 +43,6 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, "/");
           <span class="i-sun"><Icon name="sun" /></span><span class="i-moon"><Icon name="moon" /></span>
         </button>
       </div>
-      <p class="cta-email">or email <a href={`mailto:${data.contact.email}`}>{data.contact.email}</a></p>
     </div>
 
     <nav class="side-nav" aria-label="Sections" data-nav>

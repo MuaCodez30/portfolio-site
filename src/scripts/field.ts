@@ -16,7 +16,6 @@ const PUSH = 14; // max displacement near the pointer, px
 const MAX_DPR = 1.5;
 const MAX_POINTS = 80;
 const QUIET = 0.32; // visibility multiplier behind text columns
-const STORE_KEY = "motion";
 
 const root = document.documentElement;
 const wideMQ = matchMedia("(min-width: 1024px) and (hover: hover) and (pointer: fine)");
@@ -32,8 +31,6 @@ let dpr = 1;
 let raf = 0;
 let last = 0;
 let animating = false;
-let userOff = false;
-let toggle: HTMLButtonElement | null = null;
 
 // Pointer state (fed by ui.ts through setPointer, one listener for the page)
 let px = -1e4;
@@ -46,10 +43,6 @@ let quiet: [number, number][] = [];
 let ink = "#17191a";
 let accent = "#0d7a6f";
 let dark = false;
-
-try {
-  userOff = localStorage.getItem(STORE_KEY) === "off";
-} catch {}
 
 function readTheme() {
   const cs = getComputedStyle(root);
@@ -136,6 +129,7 @@ function resize() {
 function step(dt: number) {
   const ease = 1 - Math.exp(-dt * 5); // frame-rate independent smoothing
   influence += ((pointerIn ? 1 : 0) - influence) * (1 - Math.exp(-dt * 3));
+  if (bt > 0) bt = Math.max(0, bt - dt);
   for (let i = 0; i < pts.length; i++) {
     const p = pts[i];
     p.x += p.vx * dt;
@@ -157,6 +151,15 @@ function step(dt: number) {
         tx = (dx / d) * f;
         ty = (dy / d) * f;
       }
+    }
+    if (bt > 0) {
+      const dx = p.x - bx;
+      const dy = p.y - by;
+      const d = Math.sqrt(dx * dx + dy * dy) || 1;
+      const front = (1.1 - bt) * 900; // ring expands at ~900 px/s
+      const k = Math.max(0, 1 - Math.abs(d - front) / 120) * 34 * (bt / 1.1);
+      tx += (dx / d) * k;
+      ty += (dy / d) * k;
     }
     p.ox += (tx - p.ox) * ease;
     p.oy += (ty - p.oy) * ease;
@@ -285,16 +288,11 @@ function stopLoop() {
 function sync() {
   if (!wideMQ.matches) {
     unmount();
-    if (toggle) toggle.hidden = true;
     return;
   }
   mount();
-  const reduced = reduceMQ.matches;
-  if (toggle) {
-    toggle.hidden = reduced; // reduced motion: always static, no control needed
-    toggle.setAttribute("aria-pressed", String(!userOff));
-  }
-  if (!reduced && !userOff && !document.hidden) {
+  // Always animates, except when the visitor's OS asks for reduced motion
+  if (!reduceMQ.matches && !document.hidden) {
     startLoop();
   } else {
     stopLoop();
@@ -313,16 +311,18 @@ export function setPointer(x: number, y: number, inside: boolean) {
   pointerIn = inside && animating;
 }
 
-export function initField() {
-  toggle = document.querySelector<HTMLButtonElement>("[data-motion-toggle]");
-  toggle?.addEventListener("click", () => {
-    userOff = !userOff;
-    try {
-      localStorage.setItem(STORE_KEY, userOff ? "off" : "on");
-    } catch {}
-    sync();
-  });
+// Hidden detail: a ripple that pushes the network outward from (x, y)
+let bx = 0;
+let by = 0;
+let bt = 0; // seconds of ripple left
+export function burst(x: number, y: number) {
+  if (!animating) return;
+  bx = x;
+  by = y;
+  bt = 1.1;
+}
 
+export function initField() {
   wideMQ.addEventListener("change", sync);
   reduceMQ.addEventListener("change", sync);
   document.addEventListener("visibilitychange", sync);
