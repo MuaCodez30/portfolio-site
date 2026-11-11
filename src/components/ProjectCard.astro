@@ -5,13 +5,11 @@ import Icon from "./Icon.astro";
 interface Props {
   project: Project;
   featured?: boolean;
-  index?: number;
-  reveal?: boolean;
 }
-const { project: p, featured = false, index = 0, reveal = true } = Astro.props;
+const { project: p, featured = false } = Astro.props;
 ---
 
-<article class:list={["card", { reveal, "card-featured": featured }]} data-area={p.area} style={`--i:${index}`}>
+<article class:list={["card", "reveal", { "card-featured": featured, "has-more": featured && p.bullets?.length }]}>
   <div class="card-head">
     {p.metric && <span class="chip chip-accent">{p.metric}</span>}
     <span class="card-date">{p.date}</span>
@@ -19,15 +17,6 @@ const { project: p, featured = false, index = 0, reveal = true } = Astro.props;
   <h3 class="card-title">{p.name}</h3>
   {p.context && <p class="card-context">{p.context}</p>}
   <p class="card-lede">{p.lede}</p>
-  {
-    p.bullets && (
-      <ul class="bullets">
-        {p.bullets.map((b) => (
-          <li>{b}</li>
-        ))}
-      </ul>
-    )
-  }
   <ul class="tags" aria-label="Tools">
     {p.tags.map((t) => (
       <li>{t}</li>
@@ -53,5 +42,21 @@ const { project: p, featured = false, index = 0, reveal = true } = Astro.props;
         )}
       </p>
     )
+  }
+  {
+    p.bullets?.length ? (
+      <details class="more">
+        <summary>
+          <span class="more-open">Learn more</span>
+          <span class="more-close">Show less</span>
+          <Icon name="arrow" size={14} />
+        </summary>
+        <ul class="bullets">
+          {p.bullets.map((b) => (
+            <li>{b}</li>
+          ))}
+        </ul>
+      </details>
+    ) : null
   }
 </article>

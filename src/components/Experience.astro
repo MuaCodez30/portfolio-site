@@ -6,6 +6,12 @@ interface Props {
   items: Experience[];
 }
 const { items } = Astro.props;
+// Split a quote around its key phrase so that phrase can be highlighted
+const parts = (text: string, hl?: string) => {
+  const i = hl ? text.indexOf(hl) : -1;
+  return i < 0 ? [text, "", ""] : [text.slice(0, i), hl as string, text.slice(i + (hl as string).length)];
+};
+const initials = (name: string) => name.split(" ").map((w) => w[0]).join("").slice(0, 2);
 ---
 
 <ol class="jobs">
@@ -44,12 +50,21 @@ const { items } = Astro.props;
         </ul>
         {job.quote && (
           <figure class="quote">
+            <span class="quote-mark" aria-hidden="true">“</span>
             <blockquote>
-              <p>“{job.quote.text}”</p>
+              <p>{parts(job.quote.text, job.quote.highlight)[0]}{job.quote.highlight && <mark>{parts(job.quote.text, job.quote.highlight)[1]}</mark>}{parts(job.quote.text, job.quote.highlight)[2]}</p>
             </blockquote>
             <figcaption>
-              {job.quote.url ? <a class="inline-link" href={job.quote.url}>{job.quote.author}</a> : job.quote.author}
-              <span>{job.quote.role}</span>
+              <span class="quote-avatar" aria-hidden="true">{initials(job.quote.author)}</span>
+              <span class="quote-who">
+                <strong>{job.quote.author}</strong>
+                <span>{job.quote.role}{job.quote.relation && <> · {job.quote.relation}</>}</span>
+              </span>
+              {job.quote.url && (
+                <a class="quote-source" href={job.quote.url}>
+                  <Icon name="linkedin" size={13} /> Verified on LinkedIn <Icon name="arrow" size={12} />
+                </a>
+              )}
             </figcaption>
           </figure>
         )}

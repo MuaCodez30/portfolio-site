@@ -103,9 +103,45 @@ const areas = [...new Set(data.projects.map((p) => p.area).filter(Boolean))].map
               <button type="button" class="filter" data-filter={a.name} aria-pressed="false">{a.name} <span>{a.count}</span></button>
             ))}
           </div>
-          <div class="grid deck-grid">
-            {data.projects.map((p, i) => <ProjectCard project={p} index={i} reveal={false} />)}
-          </div>
+          <ul class="proj-list">
+            {data.projects.map((p) => (
+              <li class="proj" data-area={p.area}>
+                <details>
+                  <summary class="proj-row">
+                    <span class="proj-name">{p.name}</span>
+                    {p.metric && <span class="proj-metric">{p.metric}</span>}
+                    {p.date && <span class="proj-date">{p.date}</span>}
+                    <span class="proj-arrow" aria-hidden="true"><Icon name="arrow" size={14} /></span>
+                  </summary>
+                  <div class="proj-body">
+                    <p>{p.lede}</p>
+                    <ul class="tags" aria-label="Tools">
+                      {p.tags.map((t) => <li>{t}</li>)}
+                    </ul>
+                    {(p.repo || p.demo || p.note) && (
+                      <p class="card-links">
+                        {p.repo && (
+                          <a class="inline-link" href={p.repo}>
+                            <Icon name="github" size={14} /> Code <Icon name="arrow" size={13} />
+                          </a>
+                        )}
+                        {p.demo && (
+                          <a class="inline-link" href={p.demo}>
+                            Demo <Icon name="arrow" size={13} />
+                          </a>
+                        )}
+                        {p.note && (
+                          <span class="fine">
+                            <Icon name="lock" size={13} /> {p.note}
+                          </span>
+                        )}
+                      </p>
+                    )}
+                  </div>
+                </details>
+              </li>
+            ))}
+          </ul>
         </details>
       </Section>
 

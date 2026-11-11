@@ -139,12 +139,12 @@ function initReveal() {
   });
 }
 
-/* ---------- Whole experience card opens "Learn more" ---------- */
+/* ---------- Whole card opens "Learn more" (experience and main projects) ---------- */
 // A click anywhere on the card toggles its details, except on links,
 // the summary itself (native toggle) or while the user is selecting text.
 document.addEventListener("click", (e) => {
   const t = e.target as Element | null;
-  const card = t?.closest<HTMLElement>(".job-card.has-more");
+  const card = t?.closest<HTMLElement>(".card.has-more");
   if (!card || t?.closest("a, button, summary, .more .bullets")) return;
   if (getSelection()?.toString()) return;
   const d = card.querySelector<HTMLDetailsElement>("details.more");
@@ -154,7 +154,7 @@ document.addEventListener("click", (e) => {
 /* ---------- "More projects" deck: deal the cards, filter by area ---------- */
 const deck = document.querySelector<HTMLDetailsElement>("[data-deck]");
 if (deck) {
-  const cards = [...deck.querySelectorAll<HTMLElement>(".deck-grid .card")];
+  const cards = [...deck.querySelectorAll<HTMLElement>(".proj")];
   const filters = [...deck.querySelectorAll<HTMLButtonElement>(".filter")];
   const deal = () => {
     let n = 0;

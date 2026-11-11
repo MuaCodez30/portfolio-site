@@ -55,8 +55,10 @@ experience:
     tags: [Market research, EdTech]
     quote:
       text: "Muaataz is one of the best researchers I've ever met. He's fantastic to work with, very professional and organized. He puts together spectacular presentations and goes above and beyond in so many ways."
+      highlight: one of the best researchers I've ever met
       author: Kelly Kirk
-      role: Founder of Kelly Tutors · managed Muaataz directly · LinkedIn recommendation
+      role: Founder, Kelly Tutors
+      relation: Managed Muaataz directly
       url: "https://www.linkedin.com/in/muaataz-ismaeel-305680199/details/recommendations/"
 
   - company: DetalTap

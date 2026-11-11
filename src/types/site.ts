@@ -12,7 +12,7 @@ export type Experience = {
   summary: string;
   bullets?: string[];
   tags: string[];
-  quote?: { text: string; author: string; role: string; url?: string };
+  quote?: { text: string; highlight?: string; author: string; role: string; relation?: string; url?: string };
 };
 
 export type Publication = {
