@@ -1,7 +1,7 @@
 export type Experience = {
   company: string;
   title: string;
-  location: string;
+  location?: string;
   start: string;
   end: string;
   url?: string;
@@ -9,7 +9,8 @@ export type Experience = {
   website?: string;
   metric?: string;
   note?: string;
-  bullets: string[];
+  summary: string;
+  bullets?: string[];
   tags: string[];
   quote?: { text: string; author: string; role: string; url?: string };
 };
@@ -24,7 +25,7 @@ export type Publication = {
 
 export type Project = {
   name: string;
-  date: string;
+  date?: string;
   context?: string;
   metric?: string;
   lede: string;
@@ -43,13 +44,12 @@ export type SiteData = {
   location: string;
   updated: string;
   contact: { email: string; linkedin: string; github: string };
-  about: string[];
+  highlights: string[];
   experience: Experience[];
   publications: Publication[];
   featured: Project[];
   projects: Project[];
-  education: { institution: string; degree: string; date: string; detail?: string }[];
+  education: { institution: string; degree: string; date: string }[];
   skills: { group: string; items: string[] }[];
   languages: { name: string; level: string }[];
-  activities: { title: string; detail: string }[];
 };

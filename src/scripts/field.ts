@@ -68,7 +68,7 @@ function makeGlow(): HTMLCanvasElement {
   const grad = g.createRadialGradient(REACH, REACH, 0, REACH, REACH, REACH);
   grad.addColorStop(0, accent);
   grad.addColorStop(1, "transparent");
-  g.globalAlpha = dark ? 0.07 : 0.06;
+  g.globalAlpha = dark ? 0.045 : 0.04;
   g.fillStyle = grad;
   g.fillRect(0, 0, size, size);
   return c;
@@ -168,8 +168,8 @@ function draw() {
   const c = ctx;
   if (!c) return;
   c.clearRect(0, 0, w, h);
-  const lineBase = dark ? 0.24 : 0.19;
-  const dotBase = dark ? 0.36 : 0.34;
+  const lineBase = dark ? 0.15 : 0.12;
+  const dotBase = dark ? 0.24 : 0.22;
   const hl = influence;
 
   if (glow && hl > 0.01) {

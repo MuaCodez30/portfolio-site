@@ -24,9 +24,27 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, "/");
     <h1 class="name intro" style="--i:1">{data.name}</h1>
     <p class="role intro" style="--i:2">{data.role}</p>
     <p class="lede intro" style="--i:3">{data.lede}</p>
-    <p class="status intro" style="--i:4">
+    <ul class="highlights intro" style="--i:4">
+      {data.highlights.map((h) => <li>{h}</li>)}
+    </ul>
+    <p class="status intro" style="--i:5">
       <span class="dot" aria-hidden="true"></span>{data.status} · {data.location}
     </p>
+
+    <div class="side-actions intro" style="--i:6">
+      <div class="cta-row">
+        <a class="btn btn-primary btn-lg" href={`mailto:${data.contact.email}`}>
+          <Icon name="mail" size={18} /> Get in touch
+        </a>
+        <a class="btn" href={`${base}resume.pdf`} download="Muaataz-Ismaeel-CV.pdf">
+          <Icon name="download" size={16} /> Download CV
+        </a>
+        <button class="icon-btn theme-btn" type="button" data-theme-toggle aria-label="Toggle dark mode">
+          <span class="i-sun"><Icon name="sun" /></span><span class="i-moon"><Icon name="moon" /></span>
+        </button>
+      </div>
+      <p class="cta-email">or email <a href={`mailto:${data.contact.email}`}>{data.contact.email}</a></p>
+    </div>
 
     <nav class="side-nav" aria-label="Sections" data-nav>
       <ul>
@@ -42,22 +60,5 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, "/");
         }
       </ul>
     </nav>
-  </div>
-
-  <div class="side-actions intro" style="--i:5">
-    <a class="btn btn-primary" href={`${base}resume.pdf`} download="Muaataz-Ismaeel-CV.pdf">
-      <Icon name="download" size={17} /> Download CV
-    </a>
-    <div class="icon-row">
-      <a class="icon-btn" href={`mailto:${data.contact.email}`} aria-label="Email"><Icon name="mail" /></a>
-      <a class="icon-btn" href={data.contact.github} aria-label="GitHub" rel="me"><Icon name="github" /></a>
-      <a class="icon-btn" href={data.contact.linkedin} aria-label="LinkedIn" rel="me"><Icon name="linkedin" /></a>
-      <button class="icon-btn motion-btn" type="button" data-motion-toggle aria-pressed="true" aria-label="Background animation" title="Background animation" hidden>
-        <span class="i-pause"><Icon name="pause" /></span><span class="i-play"><Icon name="play" /></span>
-      </button>
-      <button class="icon-btn theme-btn" type="button" data-theme-toggle aria-label="Toggle dark mode">
-        <span class="i-sun"><Icon name="sun" /></span><span class="i-moon"><Icon name="moon" /></span>
-      </button>
-    </div>
   </div>
 </header>

@@ -8,17 +8,19 @@ interface Props {
 const { items } = Astro.props;
 ---
 
-<ol class="timeline">
+<ol class="jobs">
   {
     items.map((job) => (
-      <li class="job reveal">
-        <p class="job-date">
-          {job.start} – {job.end}
-        </p>
-        <div class="job-body">
+      <li class:list={["card", "job-card", "reveal", { "has-more": job.bullets?.length }]}>
+        <div class="job-head">
           <h3 class="job-title">
             {job.title} <span class="at">·</span> <span class="company">{job.company}</span>
           </h3>
+          <p class="job-date">
+            {job.start} – {job.end}
+          </p>
+        </div>
+        {(job.location || job.metric || job.url || job.website) && (
           <p class="job-meta">
             {job.location}
             {job.metric && <span class="chip chip-accent">{job.metric}</span>}
@@ -33,33 +35,43 @@ const { items } = Astro.props;
               </a>
             )}
           </p>
-          <ul class="bullets">
-            {job.bullets.map((b) => (
-              <li>{b}</li>
-            ))}
-          </ul>
-          <ul class="tags" aria-label="Tools">
-            {job.tags.map((t) => (
-              <li>{t}</li>
-            ))}
-          </ul>
-          {job.quote && (
-            <figure class="quote">
-              <blockquote>
-                <p>“{job.quote.text}”</p>
-              </blockquote>
-              <figcaption>
-                {job.quote.url ? <a class="inline-link" href={job.quote.url}>{job.quote.author}</a> : job.quote.author}
-                <span>{job.quote.role}</span>
-              </figcaption>
-            </figure>
-          )}
-          {job.note && (
-            <p class="fine">
-              <Icon name="lock" size={13} /> {job.note}
-            </p>
-          )}
-        </div>
+        )}
+        <p class="job-summary">{job.summary}</p>
+        <ul class="tags" aria-label="Tools">
+          {job.tags.map((t) => (
+            <li>{t}</li>
+          ))}
+        </ul>
+        {job.quote && (
+          <figure class="quote">
+            <blockquote>
+              <p>“{job.quote.text}”</p>
+            </blockquote>
+            <figcaption>
+              {job.quote.url ? <a class="inline-link" href={job.quote.url}>{job.quote.author}</a> : job.quote.author}
+              <span>{job.quote.role}</span>
+            </figcaption>
+          </figure>
+        )}
+        {job.bullets?.length ? (
+          <details class="more">
+            <summary>
+              <span class="more-open">Learn more</span>
+              <span class="more-close">Show less</span>
+              <Icon name="arrow" size={14} />
+            </summary>
+            <ul class="bullets">
+              {job.bullets.map((b) => (
+                <li>{b}</li>
+              ))}
+            </ul>
+            {job.note && (
+              <p class="fine">
+                <Icon name="lock" size={13} /> {job.note}
+              </p>
+            )}
+          </details>
+        ) : null}
       </li>
     ))
   }

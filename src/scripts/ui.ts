@@ -126,5 +126,17 @@ function initReveal() {
   });
 }
 
+/* ---------- Whole experience card opens "Learn more" ---------- */
+// A click anywhere on the card toggles its details, except on links,
+// the summary itself (native toggle) or while the user is selecting text.
+document.addEventListener("click", (e) => {
+  const t = e.target as Element | null;
+  const card = t?.closest<HTMLElement>(".job-card.has-more");
+  if (!card || t?.closest("a, button, summary, .more .bullets")) return;
+  if (getSelection()?.toString()) return;
+  const d = card.querySelector<HTMLDetailsElement>("details.more");
+  if (d) d.open = !d.open;
+});
+
 initReveal();
 initField();

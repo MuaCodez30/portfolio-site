@@ -8,13 +8,12 @@ import ProjectCard from "../components/ProjectCard.astro";
 import Icon from "../components/Icon.astro";
 
 const data = loadSite();
-const base = import.meta.env.BASE_URL.replace(/\/?$/, "/");
 const nav = [
-  { id: "about", label: "About" },
   { id: "experience", label: "Experience" },
-  { id: "research", label: "Research" },
+  { id: "research", label: "Research & publications" },
   { id: "projects", label: "Projects" },
-  { id: "education", label: "Education & skills" },
+  { id: "skills", label: "Skills & education" },
+  { id: "contact", label: "Contact" },
 ];
 const year = new Date().getFullYear();
 ---
@@ -36,8 +35,8 @@ const year = new Date().getFullYear();
   <div class="mbar">
     <a class="mbar-name" href="#top">{data.name}</a>
     <div class="mbar-actions">
-      <a class="btn btn-primary btn-sm" href={`${base}resume.pdf`} download="Muaataz-Ismaeel-CV.pdf">
-        <Icon name="download" size={15} /> CV
+      <a class="btn btn-primary btn-sm" href={`mailto:${data.contact.email}`}>
+        <Icon name="mail" size={15} /> Get in touch
       </a>
       <button class="icon-btn theme-btn" type="button" data-theme-toggle aria-label="Toggle dark mode">
         <span class="i-sun"><Icon name="sun" /></span><span class="i-moon"><Icon name="moon" /></span>
@@ -49,17 +48,11 @@ const year = new Date().getFullYear();
     <Sidebar data={data} nav={nav} />
 
     <main id="content">
-      <Section id="about" num="01" title="About">
-        <div class="prose reveal">
-          {data.about.map((p) => <p>{p}</p>)}
-        </div>
-      </Section>
-
-      <Section id="experience" num="02" title="Experience">
+      <Section id="experience" num="01" title="Experience">
         <Experience items={data.experience} />
       </Section>
 
-      <Section id="research" num="03" title="Research">
+      <Section id="research" num="02" title="Research & publications">
         {
           data.publications.map((pub) => (
             <article class="card pub reveal">
@@ -75,32 +68,22 @@ const year = new Date().getFullYear();
         }
       </Section>
 
-      <Section id="projects" num="04" title="Projects">
+      <Section id="projects" num="03" title="Academic & personal projects">
         <div class="featured">
           {data.featured.map((p) => <ProjectCard project={p} featured />)}
         </div>
-        <h3 class="sub-title">More projects</h3>
-        <div class="grid">
-          {data.projects.map((p) => <ProjectCard project={p} />)}
-        </div>
+        <details class="more-projects">
+          <summary class="btn">
+            <span class="more-open">Explore {data.projects.length} more projects</span>
+            <span class="more-close">Show fewer projects</span>
+          </summary>
+          <div class="grid">
+            {data.projects.map((p) => <ProjectCard project={p} />)}
+          </div>
+        </details>
       </Section>
 
-      <Section id="education" num="05" title="Education & skills">
-        <ul class="edu reveal">
-          {
-            data.education.map((e) => (
-              <li>
-                <div class="edu-row">
-                  <h3 class="job-title">{e.institution}</h3>
-                  <span class="card-date">{e.date}</span>
-                </div>
-                <p class="job-meta">{e.degree}</p>
-                {e.detail && <p class="card-context">{e.detail}</p>}
-              </li>
-            ))
-          }
-        </ul>
-
+      <Section id="skills" num="04" title="Skills & education">
         <dl class="skills reveal">
           {
             data.skills.map((s) => (
@@ -118,42 +101,39 @@ const year = new Date().getFullYear();
           }
           <div class="skill-row">
             <dt>Languages</dt>
-            <dd>
-              <ul class="tags">
-                {
-                  data.languages.map((l) => (
-                    <li>
-                      {l.name} <span class="muted">· {l.level}</span>
-                    </li>
-                  ))
-                }
-              </ul>
+            <dd class="langs">
+              {data.languages.map((l) => <span>{l.name} <span class="muted">({l.level})</span></span>)}
             </dd>
           </div>
         </dl>
 
-        <h3 class="sub-title">Activities</h3>
-        <ul class="activities reveal">
+
+        <ul class="edu reveal">
           {
-            data.activities.map((a) => (
-              <li>
-                <strong>{a.title}</strong>
-                <span>{a.detail}</span>
+            data.education.map((e) => (
+              <li class="edu-row">
+                <span><strong>{e.institution}</strong> <span class="muted">· {e.degree}</span></span>
+                <span class="card-date">{e.date}</span>
               </li>
             ))
           }
         </ul>
       </Section>
 
-      <footer class="footer reveal">
-        <h2 class="footer-title">Let's build something useful.</h2>
-        <p class="muted">The fastest way to reach me is email.</p>
+      <footer class="footer reveal" id="contact" aria-labelledby="contact-title">
+        <h2 class="sr-only" id="contact-title">Contact</h2>
         <div class="footer-actions">
-          <a class="btn btn-primary" href={`mailto:${data.contact.email}`}><Icon name="mail" size={17} /> {data.contact.email}</a>
-          <a class="btn" href={data.contact.linkedin}><Icon name="linkedin" size={16} /> LinkedIn</a>
-          <a class="btn" href={data.contact.github}><Icon name="github" size={16} /> GitHub</a>
+          <a class="btn btn-primary btn-lg" href={`mailto:${data.contact.email}`}><Icon name="mail" size={18} /> Get in touch</a>
+          <a class="icon-btn" href={data.contact.github} aria-label="GitHub" rel="me"><Icon name="github" /></a>
+          <a class="icon-btn" href={data.contact.linkedin} aria-label="LinkedIn" rel="me"><Icon name="linkedin" /></a>
         </div>
-        <p class="fine">© {year} {data.name} · Last updated {data.updated}</p>
+        <p class="cta-email"><a href={`mailto:${data.contact.email}`}>{data.contact.email}</a></p>
+        <div class="footer-fine">
+          <p class="fine">© {year} {data.name}</p>
+          <button class="icon-btn motion-btn" type="button" data-motion-toggle aria-pressed="true" aria-label="Background animation" title="Background animation" hidden>
+            <span class="i-pause"><Icon name="pause" size={15} /></span><span class="i-play"><Icon name="play" size={15} /></span>
+          </button>
+        </div>
       </footer>
     </main>
   </div>
