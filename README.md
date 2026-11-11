@@ -1,7 +1,7 @@
 # Muaataz Ismaeel — Portfolio
 
 Personal site built with [Astro](https://astro.build), deployed to GitHub Pages:
-https://muacodez30.github.io/portfolio-site/
+https://muaataz.com/
 
 ## Edit content
 
@@ -11,7 +11,7 @@ All text lives in [`resume.yaml`](resume.yaml). Keep it in sync with the CV at `
 
 ```bash
 npm install
-npm run dev      # http://localhost:4321/portfolio-site/
+npm run dev      # http://localhost:4321/
 npm run build    # static output in dist/
 ```
 
