@@ -48,6 +48,10 @@ const areas = [...new Set(data.projects.map((p) => p.area).filter(Boolean))].map
     </div>
   </div>
 
+  <button class="icon-btn theme-btn theme-corner" type="button" data-theme-toggle aria-label="Toggle dark mode">
+    <span class="i-sun"><Icon name="sun" /></span><span class="i-moon"><Icon name="moon" /></span>
+  </button>
+
   <div class="shell" id="top">
     <Sidebar data={data} nav={nav} />
 
