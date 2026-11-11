@@ -42,10 +42,8 @@ export type SiteData = {
   role: string;
   lede: string;
   status: string;
-  location: string;
   updated: string;
   contact: { email: string; linkedin: string; github: string };
-  highlights: string[];
   experience: Experience[];
   publications: Publication[];
   featured: Project[];

@@ -38,6 +38,19 @@ addEventListener(
 root.addEventListener("mouseleave", () => setPointer(-1e4, -1e4, false));
 addEventListener("blur", () => setPointer(-1e4, -1e4, false));
 
+/* ---------- Keep the sticky sidebar from overflowing ---------- */
+// On short screens the section menu is hidden instead of being cut off.
+const side = document.querySelector<HTMLElement>(".side");
+function fitSide() {
+  if (!side) return;
+  side.classList.remove("is-tight");
+  if (getComputedStyle(side).position !== "sticky") return;
+  if (side.scrollHeight > side.clientHeight + 1) side.classList.add("is-tight");
+}
+fitSide();
+addEventListener("resize", () => requestAnimationFrame(fitSide), { passive: true });
+document.fonts?.ready.then(fitSide);
+
 /* ---------- Active section + progress in the side nav ---------- */
 const links = new Map<string, HTMLAnchorElement>();
 document.querySelectorAll<HTMLAnchorElement>("[data-nav] a").forEach((a) => links.set(a.hash.slice(1), a));

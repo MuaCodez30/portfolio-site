@@ -4,7 +4,7 @@ import yaml from "js-yaml";
 import type { SiteData } from "../types/site";
 
 const REQUIRED: (keyof SiteData)[] = [
-  "name", "role", "lede", "contact", "highlights", "experience", "featured", "projects", "education", "skills",
+  "name", "role", "lede", "contact", "experience", "featured", "projects", "education", "skills",
 ];
 
 export function loadSite(): SiteData {

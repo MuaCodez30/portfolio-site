@@ -12,36 +12,35 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, "/");
 
 <header class="side">
   <div class="side-top">
-    <span class="avatar intro" style="--i:0" data-avatar>
-      <img
-        src={`${base}profile.png`}
-        alt={`Portrait of ${data.name}`}
-        width="200"
-        height="200"
-        fetchpriority="high"
-      />
-    </span>
+    <div class="side-head intro" style="--i:0">
+      <span class="avatar" data-avatar>
+        <img
+          src={`${base}profile.png`}
+          alt={`Portrait of ${data.name}`}
+          width="200"
+          height="200"
+          fetchpriority="high"
+        />
+      </span>
+      <button class="icon-btn theme-btn" type="button" data-theme-toggle aria-label="Toggle dark mode">
+        <span class="i-sun"><Icon name="sun" /></span><span class="i-moon"><Icon name="moon" /></span>
+      </button>
+    </div>
     <h1 class="name intro" style="--i:1">{data.name}</h1>
     <p class="role intro" style="--i:2">{data.role}</p>
     <p class="lede intro" style="--i:3">{data.lede}</p>
-    <ul class="highlights intro" style="--i:4">
-      {data.highlights.map((h) => <li>{h}</li>)}
-    </ul>
-    <p class="status intro" style="--i:5">
-      <span class="dot" aria-hidden="true"></span>{data.status} · {data.location}
+    <p class="status intro" style="--i:4">
+      <span class="dot" aria-hidden="true"></span>{data.status}
     </p>
 
-    <div class="side-actions intro" style="--i:6">
+    <div class="side-actions intro" style="--i:5">
       <div class="cta-row">
         <a class="btn btn-primary btn-lg" href={`mailto:${data.contact.email}`}>
           <Icon name="mail" size={18} /> Get in touch
         </a>
-        <a class="btn" href={`${base}resume.pdf`} download="Muaataz-Ismaeel-CV.pdf">
-          <Icon name="download" size={16} /> Download CV
+        <a class="btn btn-lg" href={`${base}resume.pdf`} download="Muaataz-Ismaeel-CV.pdf">
+          <Icon name="download" size={17} /> Download CV
         </a>
-        <button class="icon-btn theme-btn" type="button" data-theme-toggle aria-label="Toggle dark mode">
-          <span class="i-sun"><Icon name="sun" /></span><span class="i-moon"><Icon name="moon" /></span>
-        </button>
       </div>
     </div>
 
