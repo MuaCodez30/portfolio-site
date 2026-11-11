@@ -82,7 +82,7 @@ publications:
   - title: Multimodal Fake-Information Detection for Low-Resource Language in Case of Azerbaijani Language
     venue: NLPAI 2026 · Urumqi, China
     date: Jul 2026
-    status: Accepted and presented · publication forthcoming
+    status: Accepted and presented · Best Presentation Award · publication forthcoming
     authors: Project lead · co-authored with A. Aliyev, B. Hasanov, I. Alishov, A. Huseynli, S. Rustamov
 
 featured:
@@ -95,7 +95,7 @@ featured:
       - Decodes videos into frames, detects and aligns faces, and standardizes inputs for consistent analysis.
       - Extracts ResNet50 frame embeddings and uses temporal differencing to capture inconsistencies over time.
       - Trains and compares classical ML classifiers on the video-level features, with hyperparameter tuning, class-imbalance handling and error analysis.
-      - Led the team under two faculty supervisors. The work became a paper accepted and presented at NLPAI 2026.
+      - Led the team under two faculty supervisors. The work became a paper accepted and presented at NLPAI 2026, where it won the Best Presentation Award.
       - Worked hands-on on the text detection part first, then on the video detection part when the project moved to video.
     tags: [Python, ResNet50, scikit-learn, pandas, NumPy]
     repo: "https://github.com/MuaCodez30/csci-4701-deepfake-detection"
